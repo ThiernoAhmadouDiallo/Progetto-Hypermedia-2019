@@ -1,0 +1,588 @@
+---
+swagger: "2.0"
+info:
+  description: "Bookstore online."
+  version: "1.0.0"
+  title: "Bookstore"
+host: "localhost:3000"
+basePath: "/"
+tags:
+- name: "book"
+  description: "Available book"
+- name: "cart"
+  description: "Access to the cart"
+- name: "user"
+  description: "Operations about user"
+- name: "author"
+  description: "Author of a Book"
+- name: "event"
+  description: "Event where a book is presented"
+schemes:
+- "http"
+paths:
+  /books:
+    get:
+      tags:
+      - "book"
+      summary: "Books available in the inventory"
+      description: "List of books available in the inventory"
+      operationId: "getAllBooks"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A collection of Books"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Book"
+  /books/AllGenres:
+    get:
+      tags:
+      - "book"
+      summary: "All genres of books"
+      description: "List of books available grouped by genre"
+      operationId: "getAllBooksByGenre"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "All genres"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Book"
+  /books/AllThemes:
+    get:
+      tags:
+      - "book"
+      summary: "All Themes of books"
+      description: "List of books available grouped by theme"
+      operationId: "getAllBooksByTheme"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "All themes"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Book"
+  /books/bookByISBN/{bookISBN}:
+    get:
+      tags:
+      - "book"
+      summary: "Find a book by its ISBN"
+      description: "Returns a book"
+      operationId: "getBookByISBN"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "bookISBN"
+        in: "path"
+        description: "ISBN of book to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Book"
+        400:
+          description: "Invalid ISBN supplied"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Book"
+  /books/booksByGenre/{bookGenre}:
+    get:
+      tags:
+      - "book"
+      summary: "Find books by Genre"
+      description: "Returns set of Books"
+      operationId: "getBooksByGenre"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "bookGenre"
+        in: "path"
+        description: "Genre of set of books to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        400:
+          description: "Invalid Genre supplied"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Book"
+  /books/booksByTheme/{bookTheme}:
+    get:
+      tags:
+      - "book"
+      summary: "Find books by Theme"
+      description: "Returns a set of Books"
+      operationId: "getBooksByTheme"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "bookTheme"
+        in: "path"
+        description: "Theme of set of books to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        400:
+          description: "Invalid Theme supplied"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Book"
+  /books/booksByAuthor/{bookAuthor}:
+    get:
+      tags:
+      - "book"
+      summary: "Find books by Author"
+      description: "Returns a set of Books"
+      operationId: "getBooksByAuthor"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "bookAuthor"
+        in: "path"
+        description: "Author of set of books to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        400:
+          description: "Invalid Author Name supplied"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Book"
+  /books/bestSellers/:
+    get:
+      tags:
+      - "book"
+      summary: "Find bestsellers"
+      description: "Returns a set of Books"
+      operationId: "getBestSellers"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Book"
+  /books/favoriteReadings/:
+    get:
+      tags:
+      - "book"
+      summary: "Find favorite readings"
+      description: "Returns a set of Books"
+      operationId: "getFavoriteReadings"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        404:
+          description: "Books not found"
+      x-swagger-router-controller: "Book"
+  /authors:
+    get:
+      tags:
+      - "author"
+      summary: "All authors"
+      description: "List of authors"
+      operationId: "getAllAuthors"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A list of authors"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Author"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Author"
+  /author/{authorFullName}:
+    get:
+      tags:
+      - "author"
+      summary: "Find authors by Name"
+      description: "Return informations about Authors"
+      operationId: "getAuthorByFullName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "authorFullName"
+        in: "path"
+        description: "Name of author to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Author"
+        400:
+          description: "Invalid Author Name supplied"
+        404:
+          description: "Author not found"
+      x-swagger-router-controller: "Author"
+  /events:
+    get:
+      tags:
+      - "event"
+      summary: "Scheduled events"
+      description: "List of scheduled events"
+      operationId: "getAllEvents"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A list of Events"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Event"
+  /events/{bookISBN}:
+    get:
+      tags:
+      - "event"
+      summary: "Event where a book is presented"
+      description: "List events for a given book"
+      operationId: "getBookEvent"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "bookISBN"
+        in: "path"
+        description: "ISBN of the book"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "A list of Events"
+          schema: {}
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Event"
+  /user/login:
+    post:
+      tags:
+      - "user"
+      summary: "Login"
+      description: "Login with a form"
+      operationId: "userLogin"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "Username of the user who wants to connect"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "formData"
+        description: "Password of the user who wants to connect"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesfull login"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+  /user/logout:
+    get:
+      tags:
+      - "user"
+      summary: "Logout"
+      description: "Logout the client"
+      operationId: "userLogout"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "succesfully logged out"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+  /user/register:
+    post:
+      tags:
+      - "user"
+      summary: "Register"
+      description: "Register into the store"
+      operationId: "userRegister"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "succesfull registration"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+  /cart/{cartId}:
+    get:
+      tags:
+      - "cart"
+      summary: "View the content of the cart"
+      operationId: "cartCartIdGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "cartId"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "succesful operation"
+          schema:
+            $ref: "#/definitions/Cart"
+        404:
+          description: "unauthorized"
+      x-swagger-router-controller: "Cart"
+  /cart/{cartId}/books/{bookISBN}:
+    delete:
+      tags:
+      - "cart"
+      summary: "Delete book from the cart"
+      operationId: "deleteBookFromCart"
+      parameters:
+      - name: "cartId"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "bookISBN"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pet not found"
+      x-swagger-router-controller: "Cart"
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      fullName:
+        type: "string"
+      address:
+        type: "string"
+      creditcard:
+        type: "string"
+    title: "User"
+    description: "A user"
+    example:
+      id: 1
+      name: "William"
+      address: "London"
+      creditcard: "abcdefgh"
+  Cart:
+    type: "object"
+    properties:
+      total:
+        $ref: "#/definitions/Amount"
+      books:
+        type: "array"
+        items:
+          $ref: "#/definitions/Book"
+    title: "Cart"
+    description: "Order for books"
+    example:
+      total:
+        currency: "eur"
+        value: 80.75
+      books:
+      - id: 0
+        title: "Il deserto dei tartari"
+        author: "Dino Buzzati"
+        price:
+          value: 10
+          currency: "eur"
+      - id: 0
+        title: "Il deserto dei tartari"
+        author: "Dino Buzzati"
+        price:
+          value: 10
+          currency: "eur"
+  Book:
+    type: "object"
+    required:
+    - "authors"
+    - "genre"
+    - "isbn"
+    - "price"
+    - "title"
+    properties:
+      isbn:
+        type: "integer"
+        format: "int64"
+      title:
+        type: "string"
+      authors:
+        type: "array"
+        items:
+          $ref: "#/definitions/Author"
+      price:
+        $ref: "#/definitions/Amount"
+      theme:
+        type: "string"
+      genre:
+        type: "string"
+    title: "Book"
+    description: "A book for sale in the store"
+    example:
+      isbn: 1718239283928
+      title: "Hamlet"
+      authors: "William Shakespeare"
+      price:
+        value: 20
+        currency: "eur"
+      genre: "romance"
+  Amount:
+    type: "object"
+    required:
+    - "currency"
+    - "value"
+    properties:
+      value:
+        type: "number"
+        format: "double"
+        minimum: 0.01
+        maximum: 1000000000000000
+      currency:
+        $ref: "#/definitions/Currency"
+    description: "Price\n"
+    example:
+      currency: "eur"
+      value: 11
+  Currency:
+    type: "string"
+    pattern: "^[A-Z]{3,3}$"
+    description: "Currency used for the transaction"
+    example: "eur"
+  Author:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      surname:
+        type: "string"
+      info:
+        type: "string"
+    title: "Author"
+    description: "An author"
+    example:
+      id: 1
+      name: "William"
+      surname: "Shakespeare"
+      info: "Famous author"
+  Event:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      date:
+        type: "object"
+        properties: {}
+      place:
+        type: "string"
+      books:
+        type: "array"
+        items:
+          $ref: "#/definitions/Book"
+    title: "Event"
+    description: "An event"
+    example:
+      id: 1
+      name: "Presentation of Hamlet"
+      date: "2019/07/04"
+      place: "Milano"
+      books:
+      - isbn: 1718239283928
+        title: "Hamlet"
+        authors: "William Shakespeare"
+        price:
+          value: 20
+          currency: "eur"
+        genre: "romance"
+      - isbn: 8293819283920
+        title: "Macbet"
+        authors: "William Shakespeare"
+        price:
+          value: 15
+          currency: "eur"
+        genre: "Drama"

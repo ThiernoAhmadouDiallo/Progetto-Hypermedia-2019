@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Prova Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <meta name="viewport" content="width=device-width" />
+    <link href="assets/css/file.css" rel="stylesheet"/>
+</head>
+
+
+<body>
+    <div class="login-page">
+        <div class="alert alert-danger collapse" id="failureAlert" role="alert">
+        </div>
+        <div class="form">
+            <form class="register-form">
+                <div class="alert alert-success collapse" id="successAlert" role="alert">
+                </div>
+                <input id="textUser" placeholder="name" type="text"/>
+                <input id="password" placeholder="password" type="password"/>
+                <input id="mail" placeholder="email address" type="email"/>
+                <button id="submit">create</button>
+                <p class="message">Already registered? <a href="#" id="signIn">Sign In</a></p>
+            </form>
+            <form class="login-form">
+                <input id="username" placeholder="username" type="text"/>
+                <input id="passwordLogin" placeholder="password" type="password"/>
+                <button id="loginButton">Conferma</button>
+                <p class="message"> Not registered? <a href="#" id="createAccountLink">Create an account</a></p>
+            </form>
+        </div>
+    </div>
+    <script src="assets/js/files.js"></script>
+</body>
+
+</html>
