@@ -186,7 +186,7 @@ paths:
         404:
           description: "Book not found"
       x-swagger-router-controller: "Book"
-  /books/bestSellers/:
+  /books/bestSellers:
     get:
       tags:
       - "book"
@@ -195,7 +195,6 @@ paths:
       operationId: "getBestSellers"
       produces:
       - "application/json"
-      parameters: []
       responses:
         200:
           description: "successful operation"
@@ -206,7 +205,7 @@ paths:
         404:
           description: "Book not found"
       x-swagger-router-controller: "Book"
-  /books/favoriteReadings/:
+  /books/favoriteReadings:
     get:
       tags:
       - "book"
@@ -215,7 +214,31 @@ paths:
       operationId: "getFavoriteReadings"
       produces:
       - "application/json"
-      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        404:
+          description: "Books not found"
+      x-swagger-router-controller: "Book"
+  /books/similars/{bookISBN}:
+    get:
+      tags:
+        - "book"
+      summary: "Find similar books"
+      description: "Returns a set of Books"
+      operationId: "getSimilars"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "bookISBN"
+          in: "path"
+          description: "ISBN of book to search similars"
+          required: true
+          type: "string"
       responses:
         200:
           description: "successful operation"
@@ -273,6 +296,33 @@ paths:
         404:
           description: "Author not found"
       x-swagger-router-controller: "Author"
+  /authors/{isbn}:
+    get:
+      tags:
+        - "author"
+      summary: "Find authors of a book"
+      description: "Return informations about Authors of a book"
+      operationId: "getAuthorsOfABook"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "isbn"
+          in: "path"
+          description: "Isbn of the book"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Author"
+        400:
+          description: "Invalid Book ISBN supplied"
+        404:
+          description: "Author not found"
+      x-swagger-router-controller: "Author"
   /events:
     get:
       tags:
@@ -293,7 +343,7 @@ paths:
         404:
           description: "Unexpected error"
       x-swagger-router-controller: "Event"
-  /events/{bookISBN}:
+  /event/{bookISBN}:
     get:
       tags:
       - "event"
@@ -382,20 +432,19 @@ paths:
         404:
           description: "unauthorized"
       x-swagger-router-controller: "User"
-  /cart/{cartId}:
+  /cart/{username}:
     get:
       tags:
       - "cart"
       summary: "View the content of the cart"
-      operationId: "cartCartIdGET"
+      operationId: "getCart"
       produces:
       - "application/json"
       parameters:
-      - name: "cartId"
+        - name: "username"
         in: "path"
         required: true
-        type: "integer"
-        format: "int64"
+          type: "string"
       responses:
         200:
           description: "succesful operation"
@@ -404,18 +453,38 @@ paths:
         404:
           description: "unauthorized"
       x-swagger-router-controller: "Cart"
-  /cart/{cartId}/books/{bookISBN}:
+  /cart/{username}/{bookISBN}:
+    post:
+      tags:
+        - "cart"
+      summary: "Insert a book in the cart"
+      operationId: "addBookInCart"
+      parameters:
+        - name: "username"
+          in: "path"
+          required: true
+          type: "string"
+        - name: "bookISBN"
+          in: "path"
+          required: true
+          type: "integer"
+          format: "int32"
+      responses:
+        201:
+          description: "Inserted Successfully"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Cart"
     delete:
       tags:
       - "cart"
       summary: "Delete book from the cart"
       operationId: "deleteBookFromCart"
       parameters:
-      - name: "cartId"
+        - name: "username"
         in: "path"
         required: true
-        type: "integer"
-        format: "int32"
+          type: "string"
       - name: "bookISBN"
         in: "path"
         required: true

@@ -1,7 +1,7 @@
 'use strict';
 
-var utils = require('../utils/writer.js');
-var Book = require('../service/BookService');
+const utils = require('../utils/writer.js');
+const Book = require('../service/BookService');
 
 module.exports.getAllBooks = function getAllBooks (req, res, next) {
   Book.getAllBooks()
@@ -44,7 +44,7 @@ module.exports.getBestSellers = function getBestSellers (req, res, next) {
 };
 
 module.exports.getBookByISBN = function getBookByISBN (req, res, next) {
-  var bookISBN = req.swagger.params['bookISBN'].value;
+  const bookISBN = req.swagger.params['bookISBN'].value;
   Book.getBookByISBN(bookISBN)
     .then(function (response) {
       utils.writeJson(res, response);
@@ -55,7 +55,7 @@ module.exports.getBookByISBN = function getBookByISBN (req, res, next) {
 };
 
 module.exports.getBooksByAuthor = function getBooksByAuthor (req, res, next) {
-  var bookAuthor = req.swagger.params['bookAuthor'].value;
+  const bookAuthor = req.swagger.params['bookAuthor'].value;
   Book.getBooksByAuthor(bookAuthor)
     .then(function (response) {
       utils.writeJson(res, response);
@@ -66,7 +66,7 @@ module.exports.getBooksByAuthor = function getBooksByAuthor (req, res, next) {
 };
 
 module.exports.getBooksByGenre = function getBooksByGenre (req, res, next) {
-  var bookGenre = req.swagger.params['bookGenre'].value;
+  const bookGenre = req.swagger.params['bookGenre'].value;
   Book.getBooksByGenre(bookGenre)
     .then(function (response) {
       utils.writeJson(res, response);
@@ -77,7 +77,7 @@ module.exports.getBooksByGenre = function getBooksByGenre (req, res, next) {
 };
 
 module.exports.getBooksByTheme = function getBooksByTheme (req, res, next) {
-  var bookTheme = req.swagger.params['bookTheme'].value;
+  const bookTheme = req.swagger.params['bookTheme'].value;
   Book.getBooksByTheme(bookTheme)
     .then(function (response) {
       utils.writeJson(res, response);
@@ -95,4 +95,16 @@ module.exports.getFavoriteReadings = function getFavoriteReadings (req, res, nex
     .catch(function (response) {
       utils.writeJson(res, response);
     });
+};
+
+
+module.exports.getSimilars = function getSimilars(req, res, next) {
+  const bookISBN = req.swagger.params['bookISBN'].value;
+  Book.getSimilars(bookISBN)
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };

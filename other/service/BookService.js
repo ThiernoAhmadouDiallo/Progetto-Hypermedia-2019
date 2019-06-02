@@ -1,7 +1,8 @@
 'use strict';
 
-var dbConnector = require('../utils/dbConnector.js');
+const dbConnector = require('../utils/dbConnector.js');
 const pool = dbConnector.pool;
+
 
 /**
  * Books available in the inventory
@@ -11,9 +12,15 @@ const pool = dbConnector.pool;
  **/
 exports.getAllBooks = function() {
   return new Promise(function(resolve, reject) {
-    resolve();
+    pool.query('SELECT * FROM public."Books"', (error, results) => {
+      if (error) {
+        throw error;
+      } else {
+        resolve(results.rows);
+      }
+    });
   });
-}
+};
 
 
 /**
@@ -24,15 +31,16 @@ exports.getAllBooks = function() {
  **/
 exports.getAllBooksByGenre = function() {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ "", "" ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    pool.query('SELECT * FROM public."Books" order by genre', (error, results) => {
+      if (error) {
+        // TODO order
+        throw error;
+      } else {
+        resolve(results.rows);
+      }
+    });
   });
-}
+};
 
 
 /**
@@ -43,15 +51,16 @@ exports.getAllBooksByGenre = function() {
  **/
 exports.getAllBooksByTheme = function() {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ "", "" ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    pool.query('SELECT * FROM public."Books" order by theme', (error, results) => {
+      if (error) {
+        // TODO order
+        throw error;
+      } else {
+        resolve(results.rows);
+      }
+    });
   });
-}
+};
 
 
 /**
@@ -62,33 +71,15 @@ exports.getAllBooksByTheme = function() {
  **/
 exports.getBestSellers = function() {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "isbn" : 1718239283928,
-  "title" : "Hamlet",
-  "authors" : "William Shakespeare",
-  "price" : {
-    "value" : 20,
-    "currency" : "eur"
-  },
-  "genre" : "romance"
-}, {
-  "isbn" : 1718239283928,
-  "title" : "Hamlet",
-  "authors" : "William Shakespeare",
-  "price" : {
-    "value" : 20,
-    "currency" : "eur"
-  },
-  "genre" : "romance"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    pool.query('SELECT * FROM public."Books" order by sold desc limit 5', (error, results) => {
+      if (error) {
+        throw error;
+      } else {
+        resolve(results.rows);
+      }
+    });
   });
-}
+};
 
 
 /**
@@ -100,24 +91,15 @@ exports.getBestSellers = function() {
  **/
 exports.getBookByISBN = function(bookISBN) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "isbn" : 1718239283928,
-  "title" : "Hamlet",
-  "authors" : "William Shakespeare",
-  "price" : {
-    "value" : 20,
-    "currency" : "eur"
-  },
-  "genre" : "romance"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    pool.query('SELECT * FROM public."Books" where isbn = ($1)', [bookISBN], (error, results) => {
+      if (error) {
+        throw error;
+      } else {
+        resolve(results.rows);
+      }
+    });
   });
-}
+};
 
 
 /**
@@ -129,33 +111,16 @@ exports.getBookByISBN = function(bookISBN) {
  **/
 exports.getBooksByAuthor = function(bookAuthor) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "isbn" : 1718239283928,
-  "title" : "Hamlet",
-  "authors" : "William Shakespeare",
-  "price" : {
-    "value" : 20,
-    "currency" : "eur"
-  },
-  "genre" : "romance"
-}, {
-  "isbn" : 1718239283928,
-  "title" : "Hamlet",
-  "authors" : "William Shakespeare",
-  "price" : {
-    "value" : 20,
-    "currency" : "eur"
-  },
-  "genre" : "romance"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    pool.query('SELECT * FROM "Books" natural join "BooksAndAuthors" natural join "Authors" where "fullName" = ($1)', [bookAuthor], (error, results) => {
+      if (error) {
+        throw error
+      } else {
+        resolve(results.rows);
+      }
+    });
   });
-}
+};
+
 
 
 /**
@@ -167,33 +132,15 @@ exports.getBooksByAuthor = function(bookAuthor) {
  **/
 exports.getBooksByGenre = function(bookGenre) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "isbn" : 1718239283928,
-  "title" : "Hamlet",
-  "authors" : "William Shakespeare",
-  "price" : {
-    "value" : 20,
-    "currency" : "eur"
-  },
-  "genre" : "romance"
-}, {
-  "isbn" : 1718239283928,
-  "title" : "Hamlet",
-  "authors" : "William Shakespeare",
-  "price" : {
-    "value" : 20,
-    "currency" : "eur"
-  },
-  "genre" : "romance"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    pool.query('SELECT * FROM "Books" where genre = ($1)', [bookGenre], (error, results) => {
+      if (error) {
+
+      } else {
+        resolve(results.rows);
+      }
+    });
   });
-}
+};
 
 
 /**
@@ -205,33 +152,15 @@ exports.getBooksByGenre = function(bookGenre) {
  **/
 exports.getBooksByTheme = function(bookTheme) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "isbn" : 1718239283928,
-  "title" : "Hamlet",
-  "authors" : "William Shakespeare",
-  "price" : {
-    "value" : 20,
-    "currency" : "eur"
-  },
-  "genre" : "romance"
-}, {
-  "isbn" : 1718239283928,
-  "title" : "Hamlet",
-  "authors" : "William Shakespeare",
-  "price" : {
-    "value" : 20,
-    "currency" : "eur"
-  },
-  "genre" : "romance"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    pool.query('SELECT * FROM "Books" where theme = ($1)', [bookTheme], (error, results) => {
+      if (error) {
+        throw error
+      } else {
+        resolve(results.rows);
+      }
+    });
   });
-}
+};
 
 
 /**
@@ -242,12 +171,31 @@ exports.getBooksByTheme = function(bookTheme) {
  **/
 exports.getFavoriteReadings = function() {
   return new Promise(function(resolve, reject) {
-
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    pool.query('SELECT * FROM public."Books" order by "favorites" desc limit 5', (error, results) => {
+      if (error) {
+        throw error;
+      } else {
+        resolve(results.rows);
+      }
+    });
   });
-}
+};
 
+
+/**
+ * Find similar books
+ * Returns a set of Books
+ *
+ * returns List
+ **/
+exports.getSimilars = function (isbn) {
+  return new Promise(function (resolve, reject) {
+    pool.query('SELECT * FROM public."Books" where theme = (SELECT theme from "Books" where isbn = ($1)) order by theme ', [isbn], (error, results) => {
+      if (error) {
+        throw error;
+      } else {
+        resolve(results.rows);
+      }
+    });
+  });
+};

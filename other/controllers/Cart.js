@@ -1,11 +1,11 @@
 'use strict';
 
-var utils = require('../utils/writer.js');
-var Cart = require('../service/CartService');
+const utils = require('../utils/writer.js');
+const Cart = require('../service/CartService');
 
-module.exports.cartCartIdGET = function cartCartIdGET (req, res, next) {
-  var cartId = req.swagger.params['cartId'].value;
-  Cart.cartCartIdGET(cartId)
+module.exports.getCart = function getCart(req, res, next) {
+    const username = req.swagger.params['username'].value;
+    Cart.getCart(username)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -15,13 +15,25 @@ module.exports.cartCartIdGET = function cartCartIdGET (req, res, next) {
 };
 
 module.exports.deleteBookFromCart = function deleteBookFromCart (req, res, next) {
-  var cartId = req.swagger.params['cartId'].value;
-  var bookISBN = req.swagger.params['bookISBN'].value;
-  Cart.deleteBookFromCart(cartId,bookISBN)
+    const username = req.swagger.params['username'].value;
+    const bookISBN = req.swagger.params['bookISBN'].value;
+    Cart.deleteBookFromCart(username, bookISBN)
     .then(function (response) {
       utils.writeJson(res, response);
     })
     .catch(function (response) {
       utils.writeJson(res, response);
     });
+};
+
+module.exports.addBookInCart = function addBookInCart(req, res, next) {
+    const username = req.swagger.params['username'].value;
+    const bookISBN = req.swagger.params['bookISBN'].value;
+    Cart.addBookInCart(username, bookISBN)
+        .then(function (response) {
+            utils.writeJson(res, response, 201);
+        })
+        .catch(function (response) {
+            utils.writeJson(res, response);
+        });
 };

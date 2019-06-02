@@ -1,5 +1,7 @@
 'use strict';
 
+const dbConnector = require('../utils/dbConnector.js');
+const pool = dbConnector.pool;
 
 /**
  * All authors
@@ -9,25 +11,15 @@
  **/
 exports.getAllAuthors = function() {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "id" : 1,
-  "name" : "William",
-  "surname" : "Shakespeare",
-  "info" : "Famous author"
-}, {
-  "id" : 1,
-  "name" : "William",
-  "surname" : "Shakespeare",
-  "info" : "Famous author"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    pool.query('SELECT * FROM "Authors"', (error, results) => {
+      if (error) {
+        throw error;
+      } else {
+        resolve(results.rows);
+      }
+    });
   });
-}
+};
 
 
 /**
@@ -39,23 +31,35 @@ exports.getAllAuthors = function() {
  **/
 exports.getAuthorByFullName = function(authorFullName) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "id" : 1,
-  "name" : "William",
-  "surname" : "Shakespeare",
-  "info" : "Famous author"
-}, {
-  "id" : 1,
-  "name" : "William",
-  "surname" : "Shakespeare",
-  "info" : "Famous author"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    pool.query('SELECT * FROM public."Authors" where "fullName" = ($1)', [authorFullName], (error, results) => {
+      if (error) {
+        //TODO handle all errors
+        throw error
+      } else {
+        resolve(results.rows);
+      }
+    });
   });
-}
+};
+
+
+/**
+ * Find authors by Isbn
+ * Return informations about Authors of a book
+ *
+ * isbn String isbn of the book
+ * returns List
+ **/
+exports.getAuthorsOfABook = function (isbn) {
+  return new Promise(function (resolve, reject) {
+    pool.query('SELECT * FROM public."Authors" natural join "BooksAndAuthors" where isbn = ($1)', [isbn], (error, results) => {
+      if (error) {
+        //TODO handle all errors
+        throw error
+      } else {
+        resolve(results.rows);
+      }
+    });
+  });
+};
 

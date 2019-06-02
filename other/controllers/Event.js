@@ -1,7 +1,7 @@
 'use strict';
 
-var utils = require('../utils/writer.js');
-var Event = require('../service/EventService');
+const utils = require('../utils/writer.js');
+const Event = require('../service/EventService');
 
 module.exports.getAllEvents = function getAllEvents (req, res, next) {
   Event.getAllEvents()
@@ -14,7 +14,7 @@ module.exports.getAllEvents = function getAllEvents (req, res, next) {
 };
 
 module.exports.getBookEvent = function getBookEvent (req, res, next) {
-  var bookISBN = req.swagger.params['bookISBN'].value;
+    const bookISBN = req.swagger.params['bookISBN'].value;
   Event.getBookEvent(bookISBN)
     .then(function (response) {
       utils.writeJson(res, response);

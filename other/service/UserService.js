@@ -1,6 +1,6 @@
 'use strict';
 
-var dbConnector = require('../utils/dbConnector.js');
+const dbConnector = require('../utils/dbConnector.js');
 const pool = dbConnector.pool;
 
 /**
@@ -13,7 +13,7 @@ const pool = dbConnector.pool;
  **/
 exports.userLogin = function(username,password) {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM public."Users" WHERE name = ($1) AND password = ($2)', [username, password], (error, results) => {
+      pool.query('SELECT * FROM public."Users" WHERE username = ($1) AND password = ($2)', [username, password], (error, results) => {
         if (error) {
           throw error;
         }
@@ -24,7 +24,7 @@ exports.userLogin = function(username,password) {
         }
     });
   });
-}
+};
 
 
 /**
@@ -37,7 +37,7 @@ exports.userLogout = function() {
   return new Promise(function(resolve, reject) {
     resolve();
   });
-}
+};
 
 
 /**
@@ -59,5 +59,5 @@ exports.userRegister = function(body) {
       }
     });
   });
-}
+};
 
