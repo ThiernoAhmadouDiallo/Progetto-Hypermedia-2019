@@ -7,7 +7,7 @@ module.exports.userLogin = function userLogin (req, res, next) {
   const body = req.swagger.params['body'].value;
   console.log(req.user);
   console.log(req.isAuthenticated());
-  User.userLogin(body, req, res)
+    User.userLogin(body, req)
     .then(function (response) {
       utils.writeJson(res, response,200);
     })

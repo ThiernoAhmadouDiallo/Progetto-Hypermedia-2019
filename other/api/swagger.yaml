@@ -28,7 +28,6 @@ paths:
       operationId: "getAllBooks"
       produces:
         - "application/json"
-      parameters: []
       responses:
         200:
           description: "A collection of Books"
@@ -48,7 +47,6 @@ paths:
       operationId: "getAllBooksByGenre"
       produces:
         - "application/json"
-      parameters: []
       responses:
         200:
           description: "All genres"
@@ -68,7 +66,6 @@ paths:
       operationId: "getAllBooksByTheme"
       produces:
         - "application/json"
-      parameters: []
       responses:
         200:
           description: "All themes"
@@ -257,7 +254,6 @@ paths:
       operationId: "getAllAuthors"
       produces:
         - "application/json"
-      parameters: []
       responses:
         200:
           description: "A list of authors"
@@ -331,7 +327,6 @@ paths:
       operationId: "getAllEvents"
       produces:
         - "application/json"
-      parameters: []
       responses:
         200:
           description: "A list of Events"
@@ -359,8 +354,10 @@ paths:
           type: "integer"
       responses:
         200:
-          description: "A list of Events"
-          schema: {}
+          description: "The Event where the book is presented"
+          schema:
+            items:
+              $ref: "#/definitions/Event"
         404:
           description: "Unexpected error"
       x-swagger-router-controller: "Event"
@@ -373,8 +370,6 @@ paths:
       operationId: "userLogin"
       consumes:
         - "application/json"
-      produces:
-        - "application/json"
       parameters:
         - in: "body"
           name: "body"
@@ -383,7 +378,7 @@ paths:
             $ref: "#/definitions/User"
       responses:
         200:
-          description: "succesfull login"
+          description: "successfull login"
         404:
           description: "unauthorized"
       x-swagger-router-controller: "User"
@@ -396,7 +391,6 @@ paths:
       operationId: "userLogout"
       produces:
         - "application/json"
-      parameters: []
       responses:
         200:
           description: "succesfully logged out"

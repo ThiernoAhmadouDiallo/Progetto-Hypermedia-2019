@@ -18,7 +18,9 @@
     "save": "^2.4.0",
     "swagger-tools": "^0.10.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"

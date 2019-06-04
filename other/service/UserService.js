@@ -22,21 +22,21 @@ exports.userLogin = function (body, request, response) {
           throw error;
         }
       if (results.rowCount === 0) {
-        resolve('{"failure" : "Wrong Username"}');
-        }else {
+          resolve({failure: "Wrong Username"});
+      } else {
         bcrypt.compare(password, results.rows[0].password, (error, check) => {
           if (error) {
             throw error
           }
           if (check) {
             request.login(username, (error) => {
-              response.redirect('/');
+                resolve({success: "Success", redirect: '/'});
             })
           } else {
-            resolve('{"failure" : "Wrong Password"}');
+              resolve({failure: "Wrong Password"});
           }
         });
-        }
+      }
     });
   });
 };
