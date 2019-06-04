@@ -1,23 +1,15 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
 
 <head>
     <title>PROGETTO HYPERMEDIA DIALLO-BOUBACAR-ROTILI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script>
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
+    <link href="../assets/css/bootstrap.css" media="all" rel="stylesheet" type="text/css">
+    <link href="../assets/css/shop.css" media="all" rel="stylesheet" type="text/css">
+    <link href="../assets/css/style.css" media="all" rel="stylesheet" type="text/css">
 
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-    </script>
-    <link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-    <link href="css/shop.css" type="text/css" rel="stylesheet" media="all">
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="all">
-    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="../assets/css/font-awesome.css" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Merriweather+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
@@ -38,7 +30,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <h1>
-                            <a class="navbar-brand" href="index.html">Libreria Dibouro</a>
+                            <a class="navbar-brand" href="../index.html">Libreria Dibouro</a>
                         </h1>
                     </div>
                     <div class="collapse navbar-collapse navbar-ex1-collapse nav-right">
@@ -47,7 +39,7 @@
                                 <a class="page-scroll" href="#page-top"></a>
                             </li>
                             <li>
-                                <a href="index.html">Home</a>
+                                <a href="../index.html">Home</a>
                             </li>
                             <li>
                                 <a href="about.html">about us</a>
@@ -181,8 +173,7 @@
                                 </div>
                                 <div style="margin-top:10px" class="form-group">
                                     <div class="col-sm-12 controls">
-                                        <a id="btn-login" href="#" class="btn btn-success">Login </a>
-                                        <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
+                                        <a class="btn btn-success" id="btn-login">Login </a>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -281,7 +272,7 @@
             <div class="footer-cpy">
                 <div class="col-md-3 col-sm-6 footer-logo">
                     <h3>
-                        <a href="index.html">Libreria Dibouro</a>
+                        <a href="../index.html">Libreria Dibouro</a>
                     </h3>
                     <h4>about us</h4>
                     <p>Vallis Molestie Arcu Morbi Dapibus Suscipit Ante Sit Efficitur Eu estie Arcu Mor Anestie Ate Vesti.</p>
@@ -290,16 +281,16 @@
                     <h4>navigation</h4>
                     <ul>
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="../index.html">Home</a>
                         </li>
                         <li>
-                            <a href="about.html">About us</a>
+                            <a href="about.html">About Us</a>
                         </li>
                         <li>
                             <a href="shop.html">shop</a>
                         </li>
                         <li>
-                            <a href="contact.html">contact us</a>
+                            <a href="contact.html">Contact Us</a>
                         </li>
                     </ul>
                 </div>
@@ -378,64 +369,9 @@
         </div>
     </div>
     <div class="cpy-right">
-        <p>© 2019 Libreria Dibouro. All rights reserved | Design by Diallo, Boubacar, Rotili.
-            </p>
+        <p>© 2019 Libreria Dibouro. All rights reserved | Design by Diallo, Boubacar, Rotili.</p>
     </div>
-
-    <script src="js/jquery-2.2.3.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/minicart.js"></script>
-    <script>
-        chr.render();
-
-        chr.cart.on('new_checkout', function (evt) {
-            var items, len, i;
-
-            if (this.subtotal() > 0) {
-                items = this.items();
-
-                for (i = 0, len = items.length; i < len; i++) {}
-            }
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            $(".dropdown").hover(
-                function () {
-                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
-                    $(this).toggleClass('open');
-                },
-                function () {
-                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
-                    $(this).toggleClass('open');
-                }
-            );
-        });
-    </script>
-    <script src="js/scrolling-nav.js"></script>
-    <script src="js/move-top.js"></script>
-    <script src="js/easing.js"></script>
-    <script>
-        jQuery(document).ready(function ($) {
-            $(".scroll").click(function (event) {
-                event.preventDefault();
-
-                $('html,body').animate({
-                    scrollTop: $(this.hash).offset().top
-                }, 1000);
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            $().UItoTop({
-                easingType: 'easeOutQuart'
-            });
-
-        });
-    </script>
-    <script src="js/SmoothScroll.min.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script> src = "../assets/js/files.js"</script>
 </body>
 
 </html>

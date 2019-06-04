@@ -5,9 +5,25 @@ var fs = require('fs'),
 
 const express = require('express');
 const app = express();
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const swaggerTools = require('swagger-tools');
+const passport = require('passport');
 const jsyaml = require('js-yaml');
 const serverPort = process.env.PORT || 3000;
+
+
+app.use(cookieParser());
+app.use(session({
+  secret: 'hypermedia project',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {maxAge: 15 * 60 * 1000}   // validity of the session :  15 minutes
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 // swaggerRouter configuration
 var options = {
@@ -37,6 +53,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
 
   // Serve the Swagger documents and Swagger UI
   app.use(middleware.swaggerUi());
+
 
   // Start the server
   app.listen(serverPort, () => {

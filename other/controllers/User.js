@@ -4,9 +4,10 @@ const utils = require('../utils/writer.js');
 const User = require('../service/UserService');
 
 module.exports.userLogin = function userLogin (req, res, next) {
-  const username = req.swagger.params['username'].value;
-  const password = req.swagger.params['password'].value;
-  User.userLogin(username,password)
+  const body = req.swagger.params['body'].value;
+  console.log(req.user);
+  console.log(req.isAuthenticated());
+  User.userLogin(body, req, res)
     .then(function (response) {
       utils.writeJson(res, response,200);
     })
@@ -16,7 +17,7 @@ module.exports.userLogin = function userLogin (req, res, next) {
 };
 
 module.exports.userLogout = function userLogout (req, res, next) {
-  User.userLogout()
+  User.userLogout(req, res)
     .then(function (response) {
       utils.writeJson(res, response);
     })

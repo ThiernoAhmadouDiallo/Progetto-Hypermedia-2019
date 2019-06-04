@@ -1,7 +1,8 @@
 $(document).ready(() => {
-    $('#submit').click(() => {
+    $('#btn-login').click(() => {
+        console.log('soem')
         $.ajax({
-            url: '/user/register',
+            url: '/user/login',
             type: 'POST',
             async: false,
             dataType: 'json',
@@ -19,24 +20,25 @@ $(document).ready(() => {
 });
 
 
-$(document).ready(() => {
-    $('#loginButton').click(() => {
-        $.ajax({
-            url: '/user/login',
-            type: 'POST',
-            async: false,
-            dataType: 'json',
-            data:{username:$('#username').val(), password:$('#passwordLogin').val()},
-            success: success,
-            error: (error) => {
-                alert(error);
-            } 
-        });
-    });
-});
+// $(document).ready(() => {
+//     $('#loginButton').click(() => {
+//         $.ajax({
+//             url: '/user/login',
+//             type: 'POST',
+//             async: false,
+//             dataType: 'json',
+//             data:{username:$('#username').val(), password:$('#passwordLogin').val()},
+//             success: success,
+//             error: (error) => {
+//                 alert(error);
+//             }
+//         });
+//     });
+// });
 
 
 function success(data) {
+
     if (data.success) {
         $('#successAlert').text(data.success);
         $("#successAlert").fadeTo(5000, 500).slideUp(500, () => {

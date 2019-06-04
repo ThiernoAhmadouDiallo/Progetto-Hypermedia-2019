@@ -4,9 +4,16 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.19.0",
     "connect": "^3.7.0",
+    "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "jquery": "^3.4.1",
+    "json-merger": "^1.1.0",
     "lodash": "^4.17.11",
+    "passport": "^0.4.0",
     "pg": "^7.11.0",
     "save": "^2.4.0",
     "swagger-tools": "^0.10.4"
@@ -14,7 +21,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",

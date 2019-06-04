@@ -4,6 +4,8 @@ const utils = require('../utils/writer.js');
 const Book = require('../service/BookService');
 
 module.exports.getAllBooks = function getAllBooks (req, res, next) {
+    console.log(req.user);
+    console.log(req.isAuthenticated());
   Book.getAllBooks()
     .then(function (response) {
       utils.writeJson(res, response);

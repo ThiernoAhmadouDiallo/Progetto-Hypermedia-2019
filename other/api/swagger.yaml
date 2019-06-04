@@ -1,4 +1,3 @@
----
 swagger: "2.0"
 info:
   description: "Bookstore online."
@@ -7,28 +6,28 @@ info:
 host: "localhost:3000"
 basePath: "/"
 tags:
-- name: "book"
-  description: "Available book"
-- name: "cart"
-  description: "Access to the cart"
-- name: "user"
-  description: "Operations about user"
-- name: "author"
-  description: "Author of a Book"
-- name: "event"
-  description: "Event where a book is presented"
+  - name: "book"
+    description: "Available book"
+  - name: "cart"
+    description: "Access to the cart"
+  - name: "user"
+    description: "Operations about user"
+  - name: "author"
+    description: "Author of a Book"
+  - name: "event"
+    description: "Event where a book is presented"
 schemes:
-- "http"
+  - "http"
 paths:
   /books:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "Books available in the inventory"
       description: "List of books available in the inventory"
       operationId: "getAllBooks"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -43,12 +42,12 @@ paths:
   /books/AllGenres:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "All genres of books"
       description: "List of books available grouped by genre"
       operationId: "getAllBooksByGenre"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -63,12 +62,12 @@ paths:
   /books/AllThemes:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "All Themes of books"
       description: "List of books available grouped by theme"
       operationId: "getAllBooksByTheme"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -83,18 +82,18 @@ paths:
   /books/bookByISBN/{bookISBN}:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "Find a book by its ISBN"
       description: "Returns a book"
       operationId: "getBookByISBN"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "bookISBN"
-        in: "path"
-        description: "ISBN of book to return"
-        required: true
-        type: "string"
+        - name: "bookISBN"
+          in: "path"
+          description: "ISBN of book to return"
+          required: true
+          type: "string"
       responses:
         200:
           description: "successful operation"
@@ -108,18 +107,18 @@ paths:
   /books/booksByGenre/{bookGenre}:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "Find books by Genre"
       description: "Returns set of Books"
       operationId: "getBooksByGenre"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "bookGenre"
-        in: "path"
-        description: "Genre of set of books to return"
-        required: true
-        type: "string"
+        - name: "bookGenre"
+          in: "path"
+          description: "Genre of set of books to return"
+          required: true
+          type: "string"
       responses:
         200:
           description: "successful operation"
@@ -135,18 +134,18 @@ paths:
   /books/booksByTheme/{bookTheme}:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "Find books by Theme"
       description: "Returns a set of Books"
       operationId: "getBooksByTheme"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "bookTheme"
-        in: "path"
-        description: "Theme of set of books to return"
-        required: true
-        type: "string"
+        - name: "bookTheme"
+          in: "path"
+          description: "Theme of set of books to return"
+          required: true
+          type: "string"
       responses:
         200:
           description: "successful operation"
@@ -162,18 +161,18 @@ paths:
   /books/booksByAuthor/{bookAuthor}:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "Find books by Author"
       description: "Returns a set of Books"
       operationId: "getBooksByAuthor"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "bookAuthor"
-        in: "path"
-        description: "Author of set of books to return"
-        required: true
-        type: "string"
+        - name: "bookAuthor"
+          in: "path"
+          description: "Author of set of books to return"
+          required: true
+          type: "string"
       responses:
         200:
           description: "successful operation"
@@ -189,12 +188,12 @@ paths:
   /books/bestSellers:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "Find bestsellers"
       description: "Returns a set of Books"
       operationId: "getBestSellers"
       produces:
-      - "application/json"
+        - "application/json"
       responses:
         200:
           description: "successful operation"
@@ -208,12 +207,12 @@ paths:
   /books/favoriteReadings:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "Find favorite readings"
       description: "Returns a set of Books"
       operationId: "getFavoriteReadings"
       produces:
-      - "application/json"
+        - "application/json"
       responses:
         200:
           description: "successful operation"
@@ -252,12 +251,12 @@ paths:
   /authors:
     get:
       tags:
-      - "author"
+        - "author"
       summary: "All authors"
       description: "List of authors"
       operationId: "getAllAuthors"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -272,18 +271,18 @@ paths:
   /author/{authorFullName}:
     get:
       tags:
-      - "author"
+        - "author"
       summary: "Find authors by Name"
       description: "Return informations about Authors"
       operationId: "getAuthorByFullName"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "authorFullName"
-        in: "path"
-        description: "Name of author to return"
-        required: true
-        type: "string"
+        - name: "authorFullName"
+          in: "path"
+          description: "Name of author to return"
+          required: true
+          type: "string"
       responses:
         200:
           description: "successful operation"
@@ -326,12 +325,12 @@ paths:
   /events:
     get:
       tags:
-      - "event"
+        - "event"
       summary: "Scheduled events"
       description: "List of scheduled events"
       operationId: "getAllEvents"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -346,18 +345,18 @@ paths:
   /event/{bookISBN}:
     get:
       tags:
-      - "event"
+        - "event"
       summary: "Event where a book is presented"
       description: "List events for a given book"
       operationId: "getBookEvent"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "bookISBN"
-        in: "path"
-        description: "ISBN of the book"
-        required: true
-        type: "integer"
+        - name: "bookISBN"
+          in: "path"
+          description: "ISBN of the book"
+          required: true
+          type: "integer"
       responses:
         200:
           description: "A list of Events"
@@ -368,25 +367,20 @@ paths:
   /user/login:
     post:
       tags:
-      - "user"
+        - "user"
       summary: "Login"
       description: "Login with a form"
       operationId: "userLogin"
       consumes:
-      - "application/x-www-form-urlencoded"
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "username"
-        in: "formData"
-        description: "Username of the user who wants to connect"
-        required: true
-        type: "string"
-      - name: "password"
-        in: "formData"
-        description: "Password of the user who wants to connect"
-        required: true
-        type: "string"
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
       responses:
         200:
           description: "succesfull login"
@@ -396,12 +390,12 @@ paths:
   /user/logout:
     get:
       tags:
-      - "user"
+        - "user"
       summary: "Logout"
       description: "Logout the client"
       operationId: "userLogout"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -412,20 +406,20 @@ paths:
   /user/register:
     post:
       tags:
-      - "user"
+        - "user"
       summary: "Register"
       description: "Register into the store"
       operationId: "userRegister"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/User"
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
       responses:
         200:
           description: "succesfull registration"
@@ -435,15 +429,15 @@ paths:
   /cart/{username}:
     get:
       tags:
-      - "cart"
+        - "cart"
       summary: "View the content of the cart"
       operationId: "getCart"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
         - name: "username"
-        in: "path"
-        required: true
+          in: "path"
+          required: true
           type: "string"
       responses:
         200:
@@ -477,19 +471,19 @@ paths:
       x-swagger-router-controller: "Cart"
     delete:
       tags:
-      - "cart"
+        - "cart"
       summary: "Delete book from the cart"
       operationId: "deleteBookFromCart"
       parameters:
         - name: "username"
-        in: "path"
-        required: true
+          in: "path"
+          required: true
           type: "string"
-      - name: "bookISBN"
-        in: "path"
-        required: true
-        type: "integer"
-        format: "int32"
+        - name: "bookISBN"
+          in: "path"
+          required: true
+          type: "integer"
+          format: "int32"
       responses:
         400:
           description: "Invalid ID supplied"
@@ -531,26 +525,26 @@ definitions:
         currency: "eur"
         value: 80.75
       books:
-      - id: 0
-        title: "Il deserto dei tartari"
-        author: "Dino Buzzati"
-        price:
-          value: 10
-          currency: "eur"
-      - id: 0
-        title: "Il deserto dei tartari"
-        author: "Dino Buzzati"
-        price:
-          value: 10
-          currency: "eur"
+        - id: 0
+          title: "Il deserto dei tartari"
+          author: "Dino Buzzati"
+          price:
+            value: 10
+            currency: "eur"
+        - id: 0
+          title: "Il deserto dei tartari"
+          author: "Dino Buzzati"
+          price:
+            value: 10
+            currency: "eur"
   Book:
     type: "object"
     required:
-    - "authors"
-    - "genre"
-    - "isbn"
-    - "price"
-    - "title"
+      - "authors"
+      - "genre"
+      - "isbn"
+      - "price"
+      - "title"
     properties:
       isbn:
         type: "integer"
@@ -580,8 +574,8 @@ definitions:
   Amount:
     type: "object"
     required:
-    - "currency"
-    - "value"
+      - "currency"
+      - "value"
     properties:
       value:
         type: "number"
@@ -641,17 +635,17 @@ definitions:
       date: "2019/07/04"
       place: "Milano"
       books:
-      - isbn: 1718239283928
-        title: "Hamlet"
-        authors: "William Shakespeare"
-        price:
-          value: 20
-          currency: "eur"
-        genre: "romance"
-      - isbn: 8293819283920
-        title: "Macbet"
-        authors: "William Shakespeare"
-        price:
-          value: 15
-          currency: "eur"
-        genre: "Drama"
+        - isbn: 1718239283928
+          title: "Hamlet"
+          authors: "William Shakespeare"
+          price:
+            value: 20
+            currency: "eur"
+          genre: "romance"
+        - isbn: 8293819283920
+          title: "Macbet"
+          authors: "William Shakespeare"
+          price:
+            value: 15
+            currency: "eur"
+          genre: "Drama"
