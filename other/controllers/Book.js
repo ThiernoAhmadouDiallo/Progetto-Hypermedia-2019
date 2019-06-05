@@ -8,7 +8,8 @@ module.exports.getAllBooks = function getAllBooks (req, res, next) {
     console.log(req.isAuthenticated());
   Book.getAllBooks()
     .then(function (response) {
-      utils.writeJson(res, response);
+      //utils.writeJson(res, response);
+      res.send(response);
     })
     .catch(function (response) {
       utils.writeJson(res, response);
