@@ -12,6 +12,9 @@ const passport = require('passport');
 const jsyaml = require('js-yaml');
 const serverPort = process.env.PORT || 3000;
 
+//Root of static files
+app.use(express.static('public'));
+
 
 app.use(cookieParser());
 app.use(session({
@@ -45,8 +48,7 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   // Validate Swagger requests
   app.use(middleware.swaggerValidator());
 
-  //Root of static files
-  app.use(express.static('public'));
+  
 
   // Route validated requests to appropriate controller
   app.use(middleware.swaggerRouter(options));

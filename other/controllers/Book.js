@@ -50,7 +50,8 @@ module.exports.getBookByISBN = function getBookByISBN (req, res, next) {
   const bookISBN = req.swagger.params['bookISBN'].value;
   Book.getBookByISBN(bookISBN)
     .then(function (response) {
-      utils.writeJson(res, response);
+      // utils.writeJson(res, response);
+      res.send(response);
     })
     .catch(function (response) {
       utils.writeJson(res, response);
