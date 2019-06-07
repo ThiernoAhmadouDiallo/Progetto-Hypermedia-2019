@@ -2,6 +2,9 @@
 
 const dbConnector = require('../utils/dbConnector.js');
 const pool = dbConnector.pool;
+const pug = require('pug');
+
+const pugFile = pug.compileFile(__dirname + '/../../public/pages/views/authorLink.pug');
 
 /**
  * All authors
@@ -11,11 +14,12 @@ const pool = dbConnector.pool;
  **/
 exports.getAllAuthors = function() {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM "Authors"', (error, results) => {
+    pool.query('SELECT * FROM "Authors" ORDER BY "fullName"', (error, results) => {
       if (error) {
         throw error;
       } else {
-        resolve(results.rows);
+        //resolve(results.rows);
+        resolve(pugFile({authorList: results.rows}))
       }
     });
   });
