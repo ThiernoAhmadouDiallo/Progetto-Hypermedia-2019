@@ -14,7 +14,7 @@ const pugFile = pug.compileFile(__dirname + '/../../public/pages/views/authorLin
  **/
 exports.getAllAuthors = function() {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM "Authors" ORDER BY "fullName"', (error, results) => {
+    pool.query('SELECT * FROM "Authors" order by "fullName"', (error, results) => {
       if (error) {
         throw error;
       } else {
