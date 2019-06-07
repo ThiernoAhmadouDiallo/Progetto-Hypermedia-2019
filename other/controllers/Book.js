@@ -19,7 +19,8 @@ module.exports.getAllBooks = function getAllBooks (req, res, next) {
 module.exports.getAllBooksByGenre = function getAllBooksByGenre (req, res, next) {
   Book.getAllBooksByGenre()
     .then(function (response) {
-      utils.writeJson(res, response);
+      //utils.writeJson(res, response);
+      res.send(response);
     })
     .catch(function (response) {
       utils.writeJson(res, response);

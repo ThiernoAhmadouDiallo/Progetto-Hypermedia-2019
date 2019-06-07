@@ -4,7 +4,7 @@ const dbConnector = require('../utils/dbConnector.js');
 const pool = dbConnector.pool;
 const pug = require('pug');
 
-const pugFile = pug.compileFile(__dirname + '/../../public/pages/views/authorLink.pug');
+const authorsPug = pug.compileFile(__dirname + '/../../public/pages/views/authorLink.pug');
 
 /**
  * All authors
@@ -19,7 +19,7 @@ exports.getAllAuthors = function() {
         throw error;
       } else {
         //resolve(results.rows);
-        resolve(pugFile({authorList: results.rows}))
+        resolve(authorsPug({authorList: results.rows}))
       }
     });
   });

@@ -4,7 +4,7 @@ const dbConnector = require('../utils/dbConnector.js');
 const pool = dbConnector.pool;
 const pug = require('pug');
 
-const pugFile = pug.compileFile(__dirname + '/../../public/pages/views/bookCard.pug');
+const booksPug = pug.compileFile(__dirname + '/../../public/pages/views/bookCard.pug');
 
 /**
  * Books available in the inventory
@@ -18,7 +18,7 @@ exports.getAllBooks = function() {
       if (error) {
         throw error;
       } else {
-        resolve(pugFile({bookList: results.rows}));
+        resolve(booksPug({bookList: results.rows}));
       }
     });
   });
@@ -38,7 +38,7 @@ exports.getAllBooksByGenre = function() {
         // TODO order
         throw error;
       } else {
-        resolve(results.rows);
+        resolve(booksPug({bookList: results.rows}));
       }
     });
   });
