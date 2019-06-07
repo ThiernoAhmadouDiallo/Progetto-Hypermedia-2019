@@ -6,7 +6,8 @@ const Author = require('../service/AuthorService');
 module.exports.getAllAuthors = function getAllAuthors (req, res, next) {
   Author.getAllAuthors()
     .then(function (response) {
-      utils.writeJson(res, response);
+      //utils.writeJson(res, response);
+      res.send(response);
     })
     .catch(function (response) {
       utils.writeJson(res, response);
