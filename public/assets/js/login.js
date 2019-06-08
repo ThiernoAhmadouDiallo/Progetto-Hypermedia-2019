@@ -1,3 +1,5 @@
+let div = null;
+
 $(document).ready(() => {
     $('#btn-login').click(() => {
         const user = {
@@ -15,6 +17,21 @@ $(document).ready(() => {
                 } else {
                     //TODO handle
                     console.log(response.failure);
+                }
+            }
+        });
+    });
+
+    $('#cartBtn').click(() => {
+        $.ajax({
+            url: '/cart/Boubacar',
+            type: 'GET',
+            success: function (response) {
+                if (response) {
+                    $('#container').html(response);
+                } else {
+                    //TODO handle
+                    console.log(response);
                 }
             }
         });

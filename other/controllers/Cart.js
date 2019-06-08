@@ -7,7 +7,7 @@ module.exports.getCart = function getCart(req, res, next) {
     const username = req.swagger.params['username'].value;
     Cart.getCart(username)
     .then(function (response) {
-      utils.writeJson(res, response);
+        res.send(response);
     })
     .catch(function (response) {
       utils.writeJson(res, response);

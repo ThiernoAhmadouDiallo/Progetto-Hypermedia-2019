@@ -1,0 +1,22 @@
+.container
+    .col(id=username style="height: 280px")
+        each book in bookList
+            div(id="cardDelete" + book.isbn , class = "card", style="height: 280px")
+                .row.row-sm-3
+                    img.img-thumbnail(alt="..." src="../assets/images/Covers/" + book.title + ".jpg" style="width: 13rem;")
+                    .card-body
+                        h3.card-title
+                            a.text-decoration-none(href="#") #{book.title}
+                        h4
+                            | By
+                            a.text-decoration-none(href="#")    #{book.fullName}
+                        h6
+                            | Genre :
+                            a.text-decoration-none(href="#") #{book.genre}
+                        h6
+                            | Theme :
+                            a.text-decoration-none(href="#") #{book.theme}
+                        p#isbn.card-text
+                            strong.text-muted ISBN : #{book.isbn}
+                        h5 Price:  #{book.price}  €
+                        button.deleteCartBtn.btn.btn-danger(type="button" ) Delete from Cart

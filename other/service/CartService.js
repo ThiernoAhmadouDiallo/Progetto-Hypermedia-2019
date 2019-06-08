@@ -2,6 +2,8 @@
 
 const dbConnector = require('../utils/dbConnector.js');
 const pool = dbConnector.pool;
+const pug = require('pug');
+const pugFile = pug.compileFile(__dirname + '/../../public/pages/views/Cart.pug');
 
 
 
@@ -13,11 +15,11 @@ const pool = dbConnector.pool;
  **/
 exports.getCart = function (username) {
   return new Promise(function(resolve, reject) {
-    pool.query('Select * from "Carts" where username = $1', [username], (error, result) => {
+      pool.query('Select * from (("Carts" natural join "Books") natural join "BooksAndAuthors") natural join "Authors" where username = $1', [username], (error, result) => {
       if (error) {
         throw error;
       } else {
-        resolve(result.rows);
+          resolve(pugFile({bookList: result.rows, username: username}));
       }
     })
   });
