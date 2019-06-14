@@ -38,7 +38,7 @@ paths:
         404:
           description: "Unexpected error"
       x-swagger-router-controller: "Book"
-  /books/AllGenres:
+  /books/AllBooksByGenre:
     get:
       tags:
         - "book"
@@ -62,6 +62,44 @@ paths:
       tags:
         - "book"
       summary: "All Themes of books"
+      description: "List of themes available"
+      operationId: "getAllThemes"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "List of all themes"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Book"
+  /books/AllGenres:
+    get:
+      tags:
+        - "book"
+      summary: "All genres of books"
+      description: "List of genres available"
+      operationId: "getAllGenres"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "List of all genres"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Book"
+  /books/AllBooksByTheme:
+    get:
+      tags:
+        - "book"
+      summary: "All Books ordered by theme"
       description: "List of books available grouped by theme"
       operationId: "getAllBooksByTheme"
       produces:

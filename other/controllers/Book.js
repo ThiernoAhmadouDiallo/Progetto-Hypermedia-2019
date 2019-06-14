@@ -47,6 +47,28 @@ module.exports.getBestSellers = function getBestSellers (req, res, next) {
     });
 };
 
+
+module.exports.getAllThemes = function getAllThemes(req, res, next) {
+    Book.getAllThemes()
+        .then(function (response) {
+            utils.writeJson(res, response);
+        })
+        .catch(function (response) {
+            utils.writeJson(res, response);
+        });
+};
+
+
+module.exports.getAllGenres = function getAllGenres(req, res, next) {
+    Book.getAllGenres()
+        .then(function (response) {
+            utils.writeJson(res, response);
+        })
+        .catch(function (response) {
+            utils.writeJson(res, response);
+        });
+};
+
 module.exports.getBookByISBN = function getBookByISBN (req, res, next) {
   const bookISBN = req.swagger.params['bookISBN'].value;
   Book.getBookByISBN(bookISBN)

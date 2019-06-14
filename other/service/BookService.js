@@ -46,7 +46,7 @@ exports.getAllBooksByGenre = function() {
 
 
 /**
- * All Themes of books
+ * All Books ordered by theme
  * List of books available grouped by theme
  *
  * returns List
@@ -54,6 +54,45 @@ exports.getAllBooksByGenre = function() {
 exports.getAllBooksByTheme = function() {
   return new Promise(function(resolve, reject) {
     pool.query('SELECT * FROM public."Books" order by theme', (error, results) => {
+      if (error) {
+        // TODO order
+        throw error;
+      } else {
+        resolve(results.rows);
+      }
+    });
+  });
+};
+
+
+/**
+ * All themes of book
+ * List of themes available
+ *
+ * returns List of all themes
+ **/
+exports.getAllThemes = function () {
+  return new Promise(function (resolve, reject) {
+    pool.query('SELECT distinct theme FROM public."Books"', (error, results) => {
+      if (error) {
+        // TODO order
+        throw error;
+      } else {
+        resolve(results.rows);
+      }
+    });
+  });
+};
+
+/**
+ * All genre of book
+ * List of genres available
+ *
+ * returns List of all genres
+ **/
+exports.getAllGenres = function () {
+  return new Promise(function (resolve, reject) {
+    pool.query('SELECT distinct genre FROM public."Books"', (error, results) => {
       if (error) {
         // TODO order
         throw error;
@@ -77,7 +116,7 @@ exports.getBestSellers = function() {
       if (error) {
         throw error;
       } else {
-        resolve(results.rows);
+        resolve(booksPug({bookList: results.rows}));
       }
     });
   });
@@ -178,7 +217,7 @@ exports.getFavoriteReadings = function() {
       if (error) {
         throw error;
       } else {
-        resolve(results.rows);
+        resolve(booksPug({bookList: results.rows}));
       }
     });
   });
@@ -197,7 +236,7 @@ exports.getSimilars = function (isbn) {
       if (error) {
         throw error;
       } else {
-        resolve(results.rows);
+        resolve(booksPug({bookList: results.rows}));
       }
     });
   });
