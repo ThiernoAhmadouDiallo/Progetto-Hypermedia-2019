@@ -375,6 +375,29 @@ paths:
         404:
           description: "Unexpected error"
       x-swagger-router-controller: "Event"
+  /events/{idEvent}:
+    get:
+      tags:
+        - "event"
+      summary: "A Scheduled event"
+      description: "A specific event"
+      operationId: "getEvent"
+      parameters:
+        - name: "idEvent"
+          in: "path"
+          description: "the id of the event"
+          required: true
+          type: "integer"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "An event"
+          schema:
+            $ref: "#/definitions/Event"
+        404:
+          description: "Event does not exist"
+      x-swagger-router-controller: "Event"
   /event/{bookISBN}:
     get:
       tags:

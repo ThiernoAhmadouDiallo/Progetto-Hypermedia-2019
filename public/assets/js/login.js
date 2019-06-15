@@ -26,13 +26,19 @@ $(document).ready(() => {
         $.ajax({
             url: '/cart/Boubacar',
             type: 'GET',
+            async: false,
             success: function (response) {
                 if (response) {
-                    $('#container').html(response);
+                    // $('#cartDiv').html(response);
+                    // window.location = '/pages/cart.html';
+                    // console.log($('#cartDiv'))
                 } else {
                     //TODO handle
                     console.log(response);
                 }
+            },
+            error: function (error) {
+                console.log(error)
             }
         });
     });

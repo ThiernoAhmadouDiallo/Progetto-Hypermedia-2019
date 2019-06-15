@@ -23,3 +23,15 @@ module.exports.getBookEvent = function getBookEvent (req, res, next) {
       utils.writeJson(res, response);
     });
 };
+
+
+module.exports.getEvent = function getEvent(req, res, next) {
+    const idEvent = req.swagger.params['idEvent'].value;
+    Event.getEvent(idEvent)
+        .then(function (response) {
+            utils.writeJson(res, response);
+        })
+        .catch(function (response) {
+            utils.writeJson(res, response);
+        });
+};
