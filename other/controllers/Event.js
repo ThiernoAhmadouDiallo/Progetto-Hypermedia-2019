@@ -6,7 +6,7 @@ const Event = require('../service/EventService');
 module.exports.getAllEvents = function getAllEvents (req, res, next) {
   Event.getAllEvents()
     .then(function (response) {
-      utils.writeJson(res, response);
+        res.send(response);
     })
     .catch(function (response) {
       utils.writeJson(res, response);

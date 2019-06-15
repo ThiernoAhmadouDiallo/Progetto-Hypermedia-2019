@@ -2,6 +2,9 @@
 
 const dbConnector = require('../utils/dbConnector.js');
 const pool = dbConnector.pool;
+const pug = require('pug');
+const eventsPug = pug.compileFile(__dirname + '/../../public/pages/views/Events.pug');
+
 
 /**
  * Scheduled events
@@ -11,11 +14,11 @@ const pool = dbConnector.pool;
  **/
 exports.getAllEvents = function() {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM "DescriptionEvents"', (error, results) => {
+    pool.query('SELECT "idEvent", "description", "place", "nameEvent", date, "time" FROM "DescriptionEvents" order by date', (error, results) => {
       if (error) {
         throw error
       } else {
-        resolve(results.rows);
+        resolve(eventsPug({events: results.rows}));
       }
     });
   });
@@ -41,3 +44,4 @@ exports.getBookEvent = function(bookISBN) {
   });
 };
 
+//todo set the api to call a single event
