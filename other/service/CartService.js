@@ -66,6 +66,7 @@ exports.addBookInCart = function (username, bookISBN) {
         throw error;
       } else {
         resolve(result.rows);
+        //TODO ADD THE TOTAL DIV IN THE PUG FILE
       }
     })
   });

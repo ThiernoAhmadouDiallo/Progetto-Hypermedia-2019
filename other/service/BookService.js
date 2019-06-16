@@ -14,7 +14,7 @@ const booksPug = pug.compileFile(__dirname + '/../../public/pages/views/bookCard
  **/
 exports.getAllBooks = function() {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM ("Books" natural join mainauthors) join "Authors" on "idAuthor"=idauthor', (error, results) => {
+      pool.query('SELECT * FROM ("Books" natural join mainauthors) join "Authors" on "idAuthor"=idAuthor', (error, results) => {
       if (error) {
         throw error;
       } else {
@@ -213,7 +213,7 @@ exports.getBooksByTheme = function(bookTheme) {
  **/
 exports.getFavoriteReadings = function() {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM public."Books" order by "favorites" desc limit 5', (error, results) => {
+      pool.query('SELECT * FROM (public."Books" join mainauthors on "Books".isbn=mainauthors.isbn) join "Authors" on "idAuthor"=idauthor order by "favorites" desc limit 5', (error, results) => {
       if (error) {
         throw error;
       } else {

@@ -117,7 +117,7 @@ module.exports.getBooksByTheme = function getBooksByTheme (req, res, next) {
 module.exports.getFavoriteReadings = function getFavoriteReadings (req, res, next) {
   Book.getFavoriteReadings()
     .then(function (response) {
-      utils.writeJson(res, response);
+        res.send(response);
     })
     .catch(function (response) {
       utils.writeJson(res, response);
