@@ -54,7 +54,7 @@ exports.getBookEvent = function(bookISBN) {
  **/
 exports.getEvent = function (idEvent) {
   return new Promise(function (resolve, reject) {
-    pool.query('SELECT * FROM public."Events" natural join "DescriptionEvents" where "idEvent" = ($1)', [idEvent], (error, results) => {
+    pool.query('SELECT * FROM "DescriptionEvents" where "idEvent" = ($1)', [idEvent], (error, results) => {
       if (error) {
         throw error
       } else {

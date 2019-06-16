@@ -35,11 +35,17 @@ exports.getCart = function (username) {
  **/
 exports.deleteBookFromCart = function (username, bookISBN) {
   return new Promise(function (resolve, reject) {
-    pool.query('Delete from "Carts" where username = $1 and isbn = $2', [username, bookISBN], (error, result) => {
+    pool.query('Delete from "Carts" where username = $1 and isbn = $2', [username, bookISBN], (error) => {
       if (error) {
         throw error;
       } else {
-        resolve(result.rows);
+        pool.query('Select * from (("Carts" natural join "Books") natural join "BooksAndAuthors") natural join "Authors" where username = $1', [username], (error, result) => {
+          if (error) {
+            throw error;
+          } else {
+            resolve(pugFile({bookList: result.rows, username: username}));
+          }
+        })
       }
     })
   });

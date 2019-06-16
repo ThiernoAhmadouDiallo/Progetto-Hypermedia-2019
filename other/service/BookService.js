@@ -14,7 +14,7 @@ const booksPug = pug.compileFile(__dirname + '/../../public/pages/views/bookCard
  **/
 exports.getAllBooks = function() {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM public."Books"', (error, results) => {
+    pool.query('SELECT * FROM ("Books" natural join mainauthors) join "Authors" on "idAuthor"=idauthor', (error, results) => {
       if (error) {
         throw error;
       } else {
@@ -137,7 +137,7 @@ exports.getBookByISBN = function(bookISBN) {
         throw error;
       } else {
         console.log(results.rows)
-        resolve(pugFile({bookList: results.rows}));
+        resolve(booksPug({bookList: results.rows}));
       }
     });
   });

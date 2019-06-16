@@ -19,7 +19,7 @@ module.exports.deleteBookFromCart = function deleteBookFromCart (req, res, next)
     const bookISBN = req.swagger.params['bookISBN'].value;
     Cart.deleteBookFromCart(username, bookISBN)
     .then(function (response) {
-      utils.writeJson(res, response);
+        res.send(response);
     })
     .catch(function (response) {
       utils.writeJson(res, response);

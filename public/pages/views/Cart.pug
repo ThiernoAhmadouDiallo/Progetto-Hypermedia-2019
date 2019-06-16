@@ -1,22 +1,34 @@
-.container
-    .col(id=username style="height: 280px")
-        each book in bookList
-            div(id="cardDelete" + book.isbn , class = "card", style="height: 280px")
-                .row.row-sm-3
-                    img.img-thumbnail(alt="..." src="../assets/images/Covers/" + book.title + ".jpg" style="width: 13rem;")
-                    .card-body
-                        h3.card-title
-                            a.text-decoration-none(href="#") #{book.title}
-                        h4
-                            | By
-                            a.text-decoration-none(href="#")    #{book.fullName}
-                        h6
-                            | Genre :
-                            a.text-decoration-none(href="#") #{book.genre}
-                        h6
-                            | Theme :
-                            a.text-decoration-none(href="#") #{book.theme}
-                        p#isbn.card-text
-                            strong.text-muted ISBN : #{book.isbn}
-                        h5 Price:  #{book.price}  €
-                        button.deleteCartBtn.btn.btn-danger(type="button" ) Delete from Cart
+doctype html
+html(lang="en")
+    head
+        title Cart
+        meta(http-equiv="content-type" content="text/html; charset=utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
+        link( rel="stylesheet" crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T")
+        link(rel="stylesheet" href="../assets/css/Cart.css")
+        script(src= "../assets/js/Cart.js")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js")
+    body
+        .container
+            .col(id=username style="height: 280px")
+                each book in bookList
+                    div(id="cardDelete" + book.isbn , class = "card", style="height: 280px")
+                        .row.row-sm-3
+                            img.img-thumbnail(alt="..." src="../assets/images/Covers/" + book.title + ".jpg" style="width: 13rem;")
+                            .card-body
+                                h3.card-title
+                                    a.text-decoration-none(href="/books/bookByISBN/" + book.isbn) #{book.title}
+                                h4
+                                    | By
+                                    a.text-decoration-none(href="/author/" + book.fullName)    #{book.fullName}
+                                h6
+                                    | Genre :
+                                    a.text-decoration-none(href="/books/booksByGenre/" + book.genre) #{book.genre}
+                                h6
+                                    | Theme :
+                                    a.text-decoration-none(href="/books/booksByTheme/" + book.theme) #{book.theme}
+                                p#isbn.card-text
+                                    strong.text-muted ISBN : #{book.isbn}
+                                h5 Price:  #{book.price}  €
+                                button#buttonDel.deleteCartBtn.btn.btn-danger(type="button" style = "position: absolute;  bottom: 7%; right: 3%;") Delete from Cart
