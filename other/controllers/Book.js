@@ -8,7 +8,6 @@ module.exports.getAllBooks = function getAllBooks (req, res, next) {
     console.log(req.isAuthenticated());
   Book.getAllBooks()
     .then(function (response) {
-      //utils.writeJson(res, response);
       res.send(response);
     })
     .catch(function (response) {
@@ -19,7 +18,6 @@ module.exports.getAllBooks = function getAllBooks (req, res, next) {
 module.exports.getAllBooksByGenre = function getAllBooksByGenre (req, res, next) {
   Book.getAllBooksByGenre()
     .then(function (response) {
-      //utils.writeJson(res, response);
       res.send(response);
     })
     .catch(function (response) {
@@ -73,7 +71,6 @@ module.exports.getBookByISBN = function getBookByISBN (req, res, next) {
   const bookISBN = req.swagger.params['bookISBN'].value;
   Book.getBookByISBN(bookISBN)
     .then(function (response) {
-      // utils.writeJson(res, response);
       res.send(response);
     })
     .catch(function (response) {
@@ -96,7 +93,7 @@ module.exports.getBooksByGenre = function getBooksByGenre (req, res, next) {
   const bookGenre = req.swagger.params['bookGenre'].value;
   Book.getBooksByGenre(bookGenre)
     .then(function (response) {
-      utils.writeJson(res, response);
+        res.send(response);
     })
     .catch(function (response) {
       utils.writeJson(res, response);
@@ -107,7 +104,7 @@ module.exports.getBooksByTheme = function getBooksByTheme (req, res, next) {
   const bookTheme = req.swagger.params['bookTheme'].value;
   Book.getBooksByTheme(bookTheme)
     .then(function (response) {
-      utils.writeJson(res, response);
+        res.send(response);
     })
     .catch(function (response) {
       utils.writeJson(res, response);

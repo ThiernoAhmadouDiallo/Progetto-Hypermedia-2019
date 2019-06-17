@@ -55,7 +55,6 @@ exports.getAllBooksByTheme = function() {
   return new Promise(function(resolve, reject) {
     pool.query('SELECT * FROM public."Books" order by theme', (error, results) => {
       if (error) {
-        // TODO order
         throw error;
       } else {
         resolve(results.rows);
@@ -174,11 +173,11 @@ exports.getBooksByAuthor = function(bookAuthor) {
  **/
 exports.getBooksByGenre = function(bookGenre) {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM "Books" where genre = ($1)', [bookGenre], (error, results) => {
+    pool.query('SELECT * FROM "Books" natural join mainauthors join "Authors" on mainauthors.idauthor = "Authors"."idAuthor" where genre = ($1)', [bookGenre], (error, results) => {
       if (error) {
-
+        throw error
       } else {
-        resolve(results.rows);
+        resolve(booksPug({bookList: results.rows}));
       }
     });
   });
@@ -198,7 +197,7 @@ exports.getBooksByTheme = function(bookTheme) {
       if (error) {
         throw error
       } else {
-        resolve(results.rows);
+        resolve(booksPug({bookList: results.rows}));
       }
     });
   });
