@@ -66,9 +66,9 @@ exports.userLogout = function (request, response) {
 exports.userRegister = function(body) {
   return new Promise(function(resolve, reject) {
     const {username, password} = body;
-    pool.query('INSERT INTO public."Users" VALUES ($1, $2)', [username, bcrypt.hashSync(password,)], (error) => {
+    pool.query('INSERT INTO public."Users" VALUES ($1, $2)', [username, bcrypt.hashSync(password)], (error) => {
       if (error) {
-        reject('{"message" : "Username already used"}');
+        resolve('{"error" : "Username already used"}');
       } else {
         resolve('{"success" : "You have been registered successfully"}');
       }

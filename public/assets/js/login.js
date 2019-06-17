@@ -21,6 +21,8 @@ $(document).ready(() => {
             }
         });
     });
+
+
     $('#btn-signup').click(() => {
         const user = {
             username: $('#userNameSign').val(),
@@ -33,10 +35,16 @@ $(document).ready(() => {
             data: (JSON.stringify(user)),
             success: function (response) {
                 if (response.success) {
-                    $('#successAlert').text();
-                    window.location = 'login.html';
+                    $('#successAlert').text(response.success);
+                    $("#successAlert").fadeTo(5000, 500).slideUp(500, () => {
+                        $("#successAlert").slideUp(500);
+                        window.location = 'login.html';
+                    });
                 } else {
-                    console.log(response.failure);
+                    $('#failureAlert').text(data.error);
+                    $("#failureAlert").fadeTo(5000, 500).slideUp(500, () => {
+                        $("#failureAlert").slideUp(500);
+                    });
                 }
             }
         });

@@ -35,12 +35,19 @@ exports.getAllAuthors = function() {
  **/
 exports.getAuthorByFullName = function(authorFullName) {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM public."Authors" where "fullName" = ($1)', [authorFullName], (error, results) => {
+    pool.query('SELECT * FROM public."Authors" where "fullName" = ($1)', [authorFullName], (error, results1) => {
       if (error) {
-        //TODO handle all errors
         throw error
       } else {
-        resolve(results.rows);
+        const author = results1.rows[0];
+        pool.query('SELECT * FROM "BooksAndAuthors" natural join "Books" where "idAuthor" = ($1)', [idAuthor], (error, results2) => {
+          if (error) {
+            //TODO handle all errors
+            throw error
+          } else {
+            //TODO work with results2
+          }
+        });
       }
     });
   });
