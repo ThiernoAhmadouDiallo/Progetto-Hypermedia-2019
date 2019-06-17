@@ -6,6 +6,7 @@ const pug = require('pug');
 
 const booksPug = pug.compileFile(__dirname + '/../../public/pages/views/bookCard.pug');
 const genrePug = pug.compileFile(__dirname + '/../../public/pages/views/genreList.pug')
+const themePug = pug.compileFile(__dirname + '/../../public/pages/views/themeList.pug')
 
 /**
  * Books available in the inventory
@@ -78,7 +79,7 @@ exports.getAllThemes = function () {
         // TODO order
         throw error;
       } else {
-        resolve(genrePug({genreList: results.rows}));
+        resolve(themePug({themeList: results.rows}));
       }
     });
   });
@@ -97,7 +98,7 @@ exports.getAllGenres = function () {
         // TODO order
         throw error;
       } else {
-        resolve(results.rows);
+        resolve(genrePug({genreList: results.rows}));
       }
     });
   });

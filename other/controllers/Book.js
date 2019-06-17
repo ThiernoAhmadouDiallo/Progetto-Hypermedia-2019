@@ -49,7 +49,7 @@ module.exports.getBestSellers = function getBestSellers (req, res, next) {
 module.exports.getAllThemes = function getAllThemes(req, res, next) {
     Book.getAllThemes()
         .then(function (response) {
-            utils.writeJson(res, response);
+            res.send(response);
         })
         .catch(function (response) {
             utils.writeJson(res, response);
@@ -60,7 +60,7 @@ module.exports.getAllThemes = function getAllThemes(req, res, next) {
 module.exports.getAllGenres = function getAllGenres(req, res, next) {
     Book.getAllGenres()
         .then(function (response) {
-            utils.writeJson(res, response);
+            res.send(response);
         })
         .catch(function (response) {
             utils.writeJson(res, response);
