@@ -5,10 +5,10 @@ html
     body
     .container
                     .card(style='width: 18rem;')
-                        img.card-img-top(src="/assets/images/Authors/"+ author.fullName +".jpg", alt= '...')
+                        img.card-img-top(src="/assets/images/Authors/" + author.fullName + ".jpg", alt= 'A picture of ' + author.fullName)
                     .card-body
                         h3.card-title
-                            a.text-decoration-none(href="@") #{author.fullName}
+                            a.text-decoration-none(href="#") #{author.fullName}
                         h4
                             | Description
                             h6    #{author.informations}

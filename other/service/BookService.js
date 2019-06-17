@@ -134,11 +134,10 @@ exports.getBestSellers = function() {
  **/
 exports.getBookByISBN = function(bookISBN) {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM public."Books" where isbn = ($1)', [bookISBN], (error, results) => {
+    pool.query('SELECT * FROM "Books" natural join "BooksAndAuthors" natural join "Authors" where isbn = ($1)', [bookISBN], (error, results) => {
       if (error) {
         throw error;
       } else {
-        console.log(results.rows)
         resolve(booksPug({bookList: results.rows}));
       }
     });

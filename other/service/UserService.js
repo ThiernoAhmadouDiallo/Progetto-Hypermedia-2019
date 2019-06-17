@@ -66,13 +66,17 @@ exports.userLogout = function (request, response) {
 exports.userRegister = function(body) {
   return new Promise(function(resolve, reject) {
     const {username, password} = body;
-    pool.query('INSERT INTO public."Users" VALUES ($1, $2)', [username, bcrypt.hashSync(password)], (error) => {
-      if (error) {
-        resolve('{"error" : "Username already used"}');
-      } else {
-        resolve('{"success" : "You have been registered successfully"}');
-      }
-    });
+    if (username.length > 10) {
+      resolve('{"error" : "Username too long. Must be less than 10 characters"}')
+    } else {
+      pool.query('INSERT INTO public."Users" VALUES ($1, $2)', [username, bcrypt.hashSync(password)], (error) => {
+        if (error) {
+          resolve('{"error" : "Username already used"}');
+        } else {
+          resolve('{"success" : "You have been registered successfully"}');
+        }
+      });
+    }
   });
 };
 

@@ -329,33 +329,6 @@ paths:
         404:
           description: "Author not found"
       x-swagger-router-controller: "Author"
-  /authors/{isbn}:
-    get:
-      tags:
-        - "author"
-      summary: "Find authors of a book"
-      description: "Return informations about Authors of a book"
-      operationId: "getAuthorsOfABook"
-      produces:
-        - "application/json"
-      parameters:
-        - name: "isbn"
-          in: "path"
-          description: "Isbn of the book"
-          required: true
-          type: "string"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Author"
-        400:
-          description: "Invalid Book ISBN supplied"
-        404:
-          description: "Author not found"
-      x-swagger-router-controller: "Author"
   /events:
     get:
       tags:

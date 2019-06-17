@@ -15,7 +15,6 @@ $(document).ready(() => {
                 if (response.success) {
                     window.location = response.redirect;
                 } else {
-                    //TODO handle
                     console.log(response.failure);
                 }
             }
@@ -41,7 +40,7 @@ $(document).ready(() => {
                         window.location = 'login.html';
                     });
                 } else {
-                    $('#failureAlert').text(data.error);
+                    $('#failureAlert').text(response.error);
                     $("#failureAlert").fadeTo(5000, 500).slideUp(500, () => {
                         $("#failureAlert").slideUp(500);
                     });
@@ -56,10 +55,8 @@ $(document).ready(() => {
             type: 'GET',
             async: false,
             success: function (response) {
-                if (response) {
-                    // $('#cartDiv').html(response);
-                    // window.location = '/pages/cart.html';
-                    // console.log($('#cartDiv'))
+                if (response.success) {
+                    window.location.href = 'pages/cart.html';
                 } else {
                     //TODO handle
                     console.log(response);
@@ -71,26 +68,6 @@ $(document).ready(() => {
         });
     });
 });
-
-
-function success(data) {
-
-    if (data.success) {
-        $('#successAlert').text(data.success);
-        $("#successAlert").fadeTo(5000, 500).slideUp(500, () => {
-            $("#successAlert").slideUp(500);
-        });
-    }
-    if (data.failure) {
-        $('#failureAlert').text(data.failure);
-        $("#failureAlert").fadeTo(5000, 500).slideUp(500, () => {
-            $("#failureAlert").slideUp(500);
-        });
-    }
-    if (data.html) {
-        $('.form').append(data.html);
-    }
-}
 
 
 

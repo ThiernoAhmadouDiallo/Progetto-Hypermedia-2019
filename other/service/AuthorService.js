@@ -55,24 +55,3 @@ exports.getAuthorByFullName = function(authorFullName) {
   });
 };
 
-
-/**
- * Find authors by Isbn
- * Return informations about Authors of a book
- *
- * isbn String isbn of the book
- * returns List
- **/
-exports.getAuthorsOfABook = function (isbn) {
-  return new Promise(function (resolve, reject) {
-    pool.query('SELECT * FROM public."Authors" natural join "BooksAndAuthors" where isbn = ($1)', [isbn], (error, results) => {
-      if (error) {
-        //TODO handle all errors
-        throw error
-      } else {
-        resolve(results.rows);
-      }
-    });
-  });
-};
-

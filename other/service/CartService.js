@@ -19,7 +19,10 @@ exports.getCart = function (username) {
       if (error) {
         throw error;
       } else {
-          resolve(pugFile({bookList: result.rows, username: username}));
+        const val = {
+          success: pugFile({bookList: result.rows, username: username}),
+        };
+        resolve(val);
       }
     })
   });

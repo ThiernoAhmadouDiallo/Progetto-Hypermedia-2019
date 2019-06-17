@@ -30,7 +30,7 @@ module.exports.userRegister = function userRegister (req, res, next) {
   const body = req.swagger.params['body'].value;
   User.userRegister(body)
     .then(function (response) {
-        res.send(response)
+      utils.writeJson(res, response, 201);
     })
     .catch(function (response) {
         console.log(response)
