@@ -18,7 +18,6 @@ exports.getAllAuthors = function() {
       if (error) {
         throw error;
       } else {
-        //resolve(results.rows);
         resolve(authorsPug({authorList: results.rows}))
       }
     });

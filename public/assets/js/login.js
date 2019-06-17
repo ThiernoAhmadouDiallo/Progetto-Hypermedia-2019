@@ -21,6 +21,26 @@ $(document).ready(() => {
             }
         });
     });
+    $('#btn-signup').click(() => {
+        const user = {
+            username: $('#userNameSign').val(),
+            password: $('#passwdSign').val(),
+        };
+        $.ajax({
+            url: '/user/register',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            data: (JSON.stringify(user)),
+            success: function (response) {
+                if (response.success) {
+                    $('#successAlert').text();
+                    window.location = 'login.html';
+                } else {
+                    console.log(response.failure);
+                }
+            }
+        });
+    });
 
     $('#cartBtn').click(() => {
         $.ajax({
