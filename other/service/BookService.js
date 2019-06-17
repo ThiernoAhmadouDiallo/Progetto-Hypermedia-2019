@@ -5,6 +5,7 @@ const pool = dbConnector.pool;
 const pug = require('pug');
 
 const booksPug = pug.compileFile(__dirname + '/../../public/pages/views/bookCard.pug');
+const genrePug = pug.compileFile(__dirname + '/../../public/pages/views/genreList.pug')
 
 /**
  * Books available in the inventory
@@ -78,7 +79,7 @@ exports.getAllThemes = function () {
         // TODO order
         throw error;
       } else {
-        resolve(results.rows);
+        resolve(genrePug({genreList: results.rows}));
       }
     });
   });
