@@ -82,7 +82,7 @@ module.exports.getBooksByAuthor = function getBooksByAuthor (req, res, next) {
   const bookAuthor = req.swagger.params['bookAuthor'].value;
   Book.getBooksByAuthor(bookAuthor)
     .then(function (response) {
-      utils.writeJson(res, response);
+      res.send(response);
     })
     .catch(function (response) {
       utils.writeJson(res, response);

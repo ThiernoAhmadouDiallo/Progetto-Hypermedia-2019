@@ -7,6 +7,7 @@ const pug = require('pug');
 const booksPug = pug.compileFile(__dirname + '/../../public/pages/views/bookCard.pug');
 const genrePug = pug.compileFile(__dirname + '/../../public/pages/views/genreList.pug')
 const themePug = pug.compileFile(__dirname + '/../../public/pages/views/themeList.pug')
+const authorInfoPug = pug.compileFile(__dirname + '/../../public/pages/views/authorInfo.pug')
 
 /**
  * Books available in the inventory
@@ -158,7 +159,7 @@ exports.getBooksByAuthor = function(bookAuthor) {
       if (error) {
         throw error
       } else {
-        resolve(results.rows);
+        resolve(booksPug({bookList: results.rows}));
       }
     });
   });
@@ -195,7 +196,7 @@ exports.getBooksByGenre = function(bookGenre) {
  **/
 exports.getBooksByTheme = function(bookTheme) {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM "Books" where theme = ($1)', [bookTheme], (error, results) => {
+    pool.query('SELECT * FROM "Books" natural join mainauthors join "Authors" on mainauthors.idauthor = "Authors"."idAuthor" where theme = ($1)', [bookTheme], (error, results) => {
       if (error) {
         throw error
       } else {
