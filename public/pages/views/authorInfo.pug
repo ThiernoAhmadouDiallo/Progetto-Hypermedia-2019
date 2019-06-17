@@ -4,14 +4,13 @@ html
         link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
     body
     .container
-        .row
-            each author in authorList
-                .col-md-4
                     .card(style='width: 18rem;')
-                        img.card-img-top(src="assets/images/Authors/"+ author.fullName+".jpg", alt= '...')
+                        img.card-img-top(src="/assets/images/Authors/"+ author.fullName +".jpg", alt= '...')
                     .card-body
-                        h5.card-title
+                        h3.card-title
                             a.text-decoration-none(href="@") #{author.fullName}
-                        h6
+                        h4
                             | Description
-                            a.text-decoration-none(href="@")    #{author.description}
+                            h6    #{author.informations}
+                        h4 
+                            | Books:
