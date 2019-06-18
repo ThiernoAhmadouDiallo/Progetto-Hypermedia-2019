@@ -7,9 +7,13 @@ html
         .row
             each book in bookList
                 .col-md-4
-                    .card(style='width: 18rem;') 
-                        img.card-img-top(src="assets/images/Covers/"+book.title+".jpg", alt= '...')
+                    .card(style='width: 18rem;')
+                        img.card-img-top(src="/assets/images/Covers/" + book.title + ".jpg", alt= book.title + " cover")
                     .card-body
-                        h5.card-title #{book.title}
-                        p.card-text #{book.price}
-                        a.btn.btn-primary(href= '') Rent Book
+                        h5.card-title
+                            a.text-decoration-none(href="/books/bookByISBN/" + book.isbn, height="300") #{book.title}
+                        h6
+                            | By
+                            a.text-decoration-none(href="/author/" + book.fullName)    #{book.fullName}
+                        p.card-text #{book.price}  €
+                        a.btn.btn-primary(href= '#') Rent Book

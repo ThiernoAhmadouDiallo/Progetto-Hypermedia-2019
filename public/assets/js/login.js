@@ -15,8 +15,35 @@ $(document).ready(() => {
                 if (response.success) {
                     window.location = response.redirect;
                 } else {
-                    //TODO handle
                     console.log(response.failure);
+                }
+            }
+        });
+    });
+
+
+    $('#btn-signup').click(() => {
+        const user = {
+            username: $('#userNameSign').val(),
+            password: $('#passwdSign').val(),
+        };
+        $.ajax({
+            url: '/user/register',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            data: (JSON.stringify(user)),
+            success: function (response) {
+                if (response.success) {
+                    $('#successAlert').text(response.success);
+                    $("#successAlert").fadeTo(5000, 500).slideUp(500, () => {
+                        $("#successAlert").slideUp(500);
+                        window.location = 'login.html';
+                    });
+                } else {
+                    $('#failureAlert').text(response.error);
+                    $("#failureAlert").fadeTo(5000, 500).slideUp(500, () => {
+                        $("#failureAlert").slideUp(500);
+                    });
                 }
             }
         });
@@ -26,37 +53,21 @@ $(document).ready(() => {
         $.ajax({
             url: '/cart/Boubacar',
             type: 'GET',
+            async: false,
             success: function (response) {
-                if (response) {
-                    $('#container').html(response);
+                if (response.success) {
+                    window.location.href = 'pages/cart.html';
                 } else {
                     //TODO handle
                     console.log(response);
                 }
+            },
+            error: function (error) {
+                console.log(error)
             }
         });
     });
 });
-
-
-function success(data) {
-
-    if (data.success) {
-        $('#successAlert').text(data.success);
-        $("#successAlert").fadeTo(5000, 500).slideUp(500, () => {
-            $("#successAlert").slideUp(500);
-        });
-    }
-    if (data.failure) {
-        $('#failureAlert').text(data.failure);
-        $("#failureAlert").fadeTo(5000, 500).slideUp(500, () => {
-            $("#failureAlert").slideUp(500);
-        });
-    }
-    if (data.html) {
-        $('.form').append(data.html);
-    }
-}
 
 
 

@@ -44,4 +44,24 @@ exports.getBookEvent = function(bookISBN) {
   });
 };
 
+
+/**
+ * A Scheduled event
+ * A specific event
+ *
+ * idEvent Integer is the id of the event we want to get
+ * returns an Event
+ **/
+exports.getEvent = function (idEvent) {
+  return new Promise(function (resolve, reject) {
+    pool.query('SELECT * FROM "DescriptionEvents" where "idEvent" = ($1)', [idEvent], (error, results) => {
+      if (error) {
+        throw error
+      } else {
+        resolve(results.rows);
+      }
+    });
+  });
+};
+
 //todo set the api to call a single event

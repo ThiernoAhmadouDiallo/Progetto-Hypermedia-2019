@@ -5,15 +5,6 @@
     <title>PROGETTO HYPERMEDIA DIALLO-BOUBACAR-ROTILI </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-    <script>
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
-
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-    </script>
     <link href="./assets/css/bootstrap.css" media="all" rel="stylesheet" type="text/css">
     <link href="./assets/css/shop.css" media="all" rel="stylesheet" type="text/css">
     <link href="./assets/css/style.css" media="all" rel="stylesheet" type="text/css">
@@ -23,6 +14,7 @@
           rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
           rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -85,10 +77,8 @@
                     </div>
                     <div class="cart-mainf">
                         <div class="chrcart chrcart2 cart cart box_1">
-                            <form action="#" class="last" method="post">
-                                <input name="cmd" type="hidden" value="_cart">
-                                <input name="display" type="hidden" value="1">
-                                <button class="top_chr_cart" name="submit" type="submit" value="">
+                            <form>
+                                <button class="top_chr_cart" id="cartBtn">
                                     <i aria-hidden="true" class="fa fa-cart-arrow-down"></i>
                                 </button>
                             </form>
@@ -274,67 +264,6 @@
         <div class="clearfix"></div>
     </div>
 </div>
-<div>
-    <div class="w3_footerv1 section">
-        <div class="container">
-            <div class="w3_footerv1_grids">
-                <div class="col-md-3 col-sm-6 col-xs-6 w3_footerv1_grid">
-                    <h3>Contact</h3>
-                    <ul class="address">
-                        <li><i aria-hidden="true" class="glyphicon glyphicon-map-marker"></i>Piazza Leonardo Da Vinci,
-                            32,
-                            20133
-                            <span>Milano, MI, Italia.</span></li>
-                        <li><i aria-hidden="true" class="glyphicon glyphicon-envelope"></i><a
-                                href="mailto:info@example.com">info@libreriadibouro.com</a></li>
-                        <li><i aria-hidden="true" class="glyphicon glyphicon-earphone"></i>+00000000</li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-6  w3_footerv1_grid">
-                    <h3>Information</h3>
-                    <ul class="info">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="about.html">management team</a></li>
-                        <li><a href="index.html">self publish</a></li>
-                        <li><a href="#">free app's</a></li>
-                        <li><a href="contact.html">get help</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-6  w3_footerv1_grid">
-                    <h3>Category</h3>
-                    <ul class="info">
-                        <li><a href="shop.html">Action</a></li>
-                        <li><a href="shop.html">Adventure </a></li>
-                        <li><a href="shop.html">Drama</a></li>
-                        <li><a href="shop.html">Fantasy</a></li>
-                        <li><a href="shop.html">Horror</a></li>
-                        <li><a href="shop.html">Romance</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-6 w3_footerv1_grid">
-                    <h3>trending now</h3>
-                    <ul class="info">
-                        <li><a href="shop.html">audio books</a></li>
-                        <li><a href="shop.html">e-books</a></li>
-                    </ul>
-                    <h4>Follow Us</h4>
-                    <div class="agileits_social_button">
-                        <ul>
-                            <li><a class="facebook" href="#"> </a></li>
-                            <li><a class="twitter" href="#"> </a></li>
-                            <li><a class="google" href="#"> </a></li>
-                            <li><a class="instagram" href="#"> </a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-    <div class="cpy-right">
-        <p>© 2019 Libreria Dibouro. All rights reserved | Design by Diallo, Boubacar, Rotili.
-        </p>
-    </div>
-</div>
+<script src="assets/js/login.js"></script>
 </body>
 </html>

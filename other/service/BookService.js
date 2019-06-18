@@ -5,6 +5,9 @@ const pool = dbConnector.pool;
 const pug = require('pug');
 
 const booksPug = pug.compileFile(__dirname + '/../../public/pages/views/bookCard.pug');
+const genrePug = pug.compileFile(__dirname + '/../../public/pages/views/genreList.pug')
+const themePug = pug.compileFile(__dirname + '/../../public/pages/views/themeList.pug')
+const authorInfoPug = pug.compileFile(__dirname + '/../../public/pages/views/authorInfo.pug')
 
 /**
  * Books available in the inventory
@@ -14,7 +17,7 @@ const booksPug = pug.compileFile(__dirname + '/../../public/pages/views/bookCard
  **/
 exports.getAllBooks = function() {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM public."Books"', (error, results) => {
+      pool.query('SELECT * FROM ("Books" natural join mainauthors) join "Authors" on "idAuthor"=idAuthor', (error, results) => {
       if (error) {
         throw error;
       } else {
@@ -55,7 +58,6 @@ exports.getAllBooksByTheme = function() {
   return new Promise(function(resolve, reject) {
     pool.query('SELECT * FROM public."Books" order by theme', (error, results) => {
       if (error) {
-        // TODO order
         throw error;
       } else {
         resolve(results.rows);
@@ -78,7 +80,7 @@ exports.getAllThemes = function () {
         // TODO order
         throw error;
       } else {
-        resolve(results.rows);
+        resolve(themePug({themeList: results.rows}));
       }
     });
   });
@@ -97,7 +99,7 @@ exports.getAllGenres = function () {
         // TODO order
         throw error;
       } else {
-        resolve(results.rows);
+        resolve(genrePug({genreList: results.rows}));
       }
     });
   });
@@ -132,12 +134,11 @@ exports.getBestSellers = function() {
  **/
 exports.getBookByISBN = function(bookISBN) {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM public."Books" where isbn = ($1)', [bookISBN], (error, results) => {
+    pool.query('SELECT * FROM "Books" natural join "BooksAndAuthors" natural join "Authors" where isbn = ($1)', [bookISBN], (error, results) => {
       if (error) {
         throw error;
       } else {
-        console.log(results.rows)
-        resolve(pugFile({bookList: results.rows}));
+        resolve(booksPug({bookList: results.rows}));
       }
     });
   });
@@ -157,7 +158,7 @@ exports.getBooksByAuthor = function(bookAuthor) {
       if (error) {
         throw error
       } else {
-        resolve(results.rows);
+        resolve(booksPug({bookList: results.rows}));
       }
     });
   });
@@ -174,11 +175,11 @@ exports.getBooksByAuthor = function(bookAuthor) {
  **/
 exports.getBooksByGenre = function(bookGenre) {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM "Books" where genre = ($1)', [bookGenre], (error, results) => {
+    pool.query('SELECT * FROM "Books" natural join mainauthors join "Authors" on mainauthors.idauthor = "Authors"."idAuthor" where genre = ($1)', [bookGenre], (error, results) => {
       if (error) {
-
+        throw error
       } else {
-        resolve(results.rows);
+        resolve(booksPug({bookList: results.rows}));
       }
     });
   });
@@ -194,11 +195,11 @@ exports.getBooksByGenre = function(bookGenre) {
  **/
 exports.getBooksByTheme = function(bookTheme) {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM "Books" where theme = ($1)', [bookTheme], (error, results) => {
+    pool.query('SELECT * FROM "Books" natural join mainauthors join "Authors" on mainauthors.idauthor = "Authors"."idAuthor" where theme = ($1)', [bookTheme], (error, results) => {
       if (error) {
         throw error
       } else {
-        resolve(results.rows);
+        resolve(booksPug({bookList: results.rows}));
       }
     });
   });
@@ -213,7 +214,7 @@ exports.getBooksByTheme = function(bookTheme) {
  **/
 exports.getFavoriteReadings = function() {
   return new Promise(function(resolve, reject) {
-    pool.query('SELECT * FROM public."Books" order by "favorites" desc limit 5', (error, results) => {
+      pool.query('SELECT * FROM (public."Books" join mainauthors on "Books".isbn=mainauthors.isbn) join "Authors" on "idAuthor"=idauthor order by "favorites" desc limit 5', (error, results) => {
       if (error) {
         throw error;
       } else {

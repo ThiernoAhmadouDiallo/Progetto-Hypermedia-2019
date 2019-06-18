@@ -79,10 +79,10 @@
                     </div>
                     <div class="cart-mainf">
                         <div class="chrcart chrcart2 cart cart box_1">
-                            <form action="#" class="last" method="post">
+                            <form>
                                 <input name="cmd" type="hidden" value="_cart">
                                 <input name="display" type="hidden" value="1">
-                                <button class="top_chr_cart" name="submit" type="submit" value="">
+                                <button id="cartBtn">
                                     <i aria-hidden="true" class="fa fa-cart-arrow-down"></i>
                                 </button>
                             </form>
@@ -158,15 +158,14 @@
                     </div>
                     <div class="panel-body">
                         <form action="#" class="form-horizontal" id="signupform" method="post">
-                            <div class="alert alert-danger" id="signupalert" style="display:none">
-                                <p>Error:</p>
-                                <span></span>
+                            <div class="alert alert-success collapse" id="successAlert" role="alert">
+                            </div>
+                            <div class="alert alert-danger collapse" id="failureAlert" role="alert">
                             </div>
                             <div class="form-group">
                                 <label class="col-md-3 col-sm-3 col-xs-3 control-label">Username</label>
                                 <div class="col-md-9 col-sm-9 col-xs-9">
-                                    <input class="form-control" name="Username" placeholder="Username" required=""
-                                           type="text">
+                                    <input class="form-control" id="userNameSign" placeholder="Username" type="text">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -179,8 +178,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 col-sm-3 col-xs-3 control-label">Password</label>
                                 <div class="col-md-9 col-sm-9 col-xs-9">
-                                    <input class="form-control" name="passwd" placeholder="Password" required=""
-                                           type="password">
+                                    <input class="form-control" id="passwdSign" placeholder="Password" type="password">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -198,6 +196,7 @@
     </div>
 </div>
 <footer>
+    <!--    TODO perché i bottoni del carrello e utente sono bianchi ?-->
     <div class="w3_footerv1 section">
         <div class="container">
             <div class="w3_footerv1_grids">
@@ -214,42 +213,38 @@
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-6  w3_footerv1_grid">
-                    <h3>Information</h3>
+                    <h3>Shop</h3>
                     <ul class="info">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="about.html">management team</a></li>
-                        <li><a href="index.html">self publish</a></li>
-                        <li><a href="#">free app's</a></li>
-                        <li><a href="contact.html">get help</a></li>
+                        <li><a href="#">Bestsellers</a></li>
+                        <li><a href="#">New Releases</a></li>
+                        <li><a href="#">Collections</a></li>
+                        <li><a href="#">Reviews</a></li>
+                        <li><a href="#">Site Map</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3 col-sm-6 col-xs-6  w3_footerv1_grid">
-                    <h3>Category</h3>
+                <div class="col-md-3 col-sm-6 col-xs-6 ">
+                    <h3>Social</h3>
                     <ul class="info">
-                        <li><a href="shop.html">Action</a></li>
-                        <li><a href="shop.html">Adventure </a></li>
-                        <li><a href="shop.html">Drama</a></li>
-                        <li><a href="shop.html">Fantasy</a></li>
-                        <li><a href="shop.html">Horror</a></li>
-                        <li><a href="shop.html">Romance</a></li>
+                        <li><a href="#">Google+</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Snapchat</a></li>
+                        <li><a href="#">Youtube</a></li>
                     </ul>
                 </div>
-                <div class="col-md-3 col-sm-6 col-xs-6 w3_footerv1_grid">
-                    <h3>trending now</h3>
+                <div class="col-md-3 col-sm-6 col-xs-6 ">
+                    <h3>About Dibouro</h3>
                     <ul class="info">
-                        <li><a href="shop.html">audio books</a></li>
-                        <li><a href="shop.html">e-books</a></li>
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Meet Our Team</a></li>
+                        <li><a href="#">Join Our Team</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">FAQ</a></li>
                     </ul>
-                    <h4>Follow Us</h4>
-                    <div class="agileits_social_button">
-                        <ul>
-                            <li><a class="facebook" href="#"> </a></li>
-                            <li><a class="twitter" href="#"> </a></li>
-                            <li><a class="google" href="#"> </a></li>
-                            <li><a class="instagram" href="#"> </a></li>
-                        </ul>
-                    </div>
                 </div>
+
+
                 <div class="clearfix"></div>
             </div>
         </div>
